@@ -1,0 +1,5 @@
+# Comment or initial rules 
+*.pyc
+__pycache__/
+
+venv/
