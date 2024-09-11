@@ -1,0 +1,380 @@
+<!-- templates/index.html -->
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}
+Accueil - Mon Site
+{% endblock %}
+
+{% block content %}
+
+
+<div id="carouselExample" class="carousel slide custom-carousel" data-bs-ride="carousel">
+  <div class="carousel-inner">
+      {% for item in carousels %}
+      <div class="carousel-item {% if forloop.first %}active{% endif %}">
+          <img src="{{ item.image.url }}" class="d-block w-100" alt="{{ item.title }}">
+          <div class="carousel-caption">
+              <div class="title">{{ item.title }}</div>
+              <div class="description">{{ item.description }}</div>
+              <div class="btn-wrapper">
+                  <a class="btn btn-primary" href="" role="button">Demander un reboisement</a>
+              </div>
+          </div>
+      </div>
+      {% endfor %}
+  </div>
+  <!-- Les boutons de contrôle du carousel restent inchangés -->
+  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Previous</span>
+  </button>
+  <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Next</span>
+  </button>
+</div>
+<div style="background-color: #d2ebf7;display: flex;"></div>
+  <label for="infos" style="background-color: rgb(142, 7, 34); padding: 10px;color: white;font-size: 1.5rem;font-weight: 100;">infos news </label>
+  <label for="infos" style="background-color: #d2ebf7;width: 80%; padding-left: 50px;font-size: 2rem;">info1</label>
+</div>
+<section id="acceuil" class="section">
+    <div style="padding: 20px;">
+        <h1 style="text-align: center;">Les reboisements gouvernementaux</h1>
+        <div style="display: flex; justify-content: center; margin-top: 20px;">
+          <!-- Exemple de carte -->
+          <div class="card mb-3" style="width: 95%; background-color: #e1e2e4;">
+            <div class="row g-0">
+              <div class="col-md-4">
+                <img src="{% static 'img/image3.jpg' %}" class="img-fluid rounded-start" alt="...">
+              </div>
+              <div class="col-md-8">
+                <div class="card-body">
+                  <h5 class="card-title">Card title</h5>
+                  <p class="card-text truncated-text">Cette carte contient un texte plus long que vous pouvez afficher complètement en cliquant sur "Voir plus". Le texte de la carte peut être plus ou moins long selon les besoins. Voici un texte d'exemple pour illustrer cela.</p>
+                  <button class="toggle-btn btn btn-link">Voir plus</button>
+                  <p class="card-text">
+                    <small class="text-body-secondary">Publié le: <strong>01/01/2024</strong></small><br>
+                    <small class="text-body-secondary">Publié il y a: <strong>3 jours</strong></small>
+                  </p>
+                </div>
+                <div class="card-footer d-flex justify-content-between align-items-center">
+                  <small class="text-body-secondary">
+                    <i class="fas fa-comment" style="font-size: 25px; color: rgb(92, 100, 107); margin-right: 20px;"></i> : <strong style="font-size: 20px; margin-left: 10px;">5</strong>
+                  </small>
+                  <small class="text-body-secondary">
+                    <i class="fas fa-thumbs-up" style="font-size: 25px; color: rgb(8, 132, 226); margin-right: 20px;"></i> : <strong  style="font-size: 20px; margin-left: 10px;">4</strong>
+                  </small>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+        
+        </div>
+
+        <div class="d-flex overflow-auto p-3" style="width: 72rem;">
+          <div class="card m-2" style="flex: 0 0 18rem;">
+            <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
+              <img src="https://mdbcdn.b-cdn.net/img/new/standard/nature/111.webp" class="img-fluid" />
+              <a href="#!">
+                <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
+              </a>
+            </div>
+            <div class="card-body">
+              <h5 class="card-title">Card title 1</h5>
+              <p class="card-text truncate-text">Some quick example text to build on the card title and make up the bulk of the card's content. This text is longer to demonstrate truncation.</p>
+              <button class="btn btn-link toggle-btn">Voir plus</button>
+              <div class="mt-2 text-muted">Publié le : <span class="publish-date">01/01/2024 à 12:00</span></div>
+              <div class="card-footer mt-1">
+                <span class="me-2"><i class="fas fa-comment"></i> <span class="comments-count">5</span></span>
+                <span class="me-2"><i class="fas fa-thumbs-up" style="color: rgb(5, 105, 145); margin-left: 100px;"></i> <span class="likes-count">10</span></span>
+              </div>
+            </div>
+          </div>
+          
+          
+        
+          <div class="card m-2" style="flex: 0 0 18rem;">
+            <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
+              <img src="https://mdbcdn.b-cdn.net/img/new/standard/nature/112.webp" class="img-fluid" />
+              <a href="#!">
+                <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
+              </a>
+            </div>
+            <div class="card-body">
+              <h5 class="card-title">Card title 2</h5>
+              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+              <a href="#!" class="btn btn-primary">Button</a>
+            </div>
+          </div>
+        
+          <div class="card m-2" style="flex: 0 0 18rem;">
+            <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
+              <img src="https://mdbcdn.b-cdn.net/img/new/standard/nature/113.webp" class="img-fluid" />
+              <a href="#!">
+                <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
+              </a>
+            </div>
+            <div class="card-body">
+              <h5 class="card-title">Card title 3</h5>
+              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+              <a href="#!" class="btn btn-primary">Button</a>
+            </div>
+          </div>
+        
+          <div class="card m-2" style="flex: 0 0 18rem;">
+            <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
+              <img src="https://mdbcdn.b-cdn.net/img/new/standard/nature/114.webp" class="img-fluid" />
+              <a href="#!">
+                <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
+              </a>
+            </div>
+            <div class="card-body">
+              <h5 class="card-title">Card title 4</h5>
+              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+              <a href="#!" class="btn btn-primary">Button</a>
+            </div>
+          </div>
+        
+          <div class="card m-2" style="flex: 0 0 18rem;">
+            <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
+              <img src="https://mdbcdn.b-cdn.net/img/new/standard/nature/115.webp" class="img-fluid" />
+              <a href="#!">
+                <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
+              </a>
+            </div>
+            <div class="card-body">
+              <h5 class="card-title">Card title 5</h5>
+              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+              <a href="#!" class="btn btn-primary">Button</a>
+            </div>
+          </div>
+        
+          <div class="card m-2" style="flex: 0 0 18rem;">
+            <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
+              <img src="https://mdbcdn.b-cdn.net/img/new/standard/nature/116.webp" class="img-fluid" />
+              <a href="#!">
+                <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
+              </a>
+            </div>
+            <div class="card-body">
+              <h5 class="card-title">Card title 6</h5>
+              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+              <a href="#!" class="btn btn-primary">Button</a>
+            </div>
+          </div>
+        
+          <div class="card m-2" style="flex: 0 0 18rem;">
+            <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
+              <img src="https://mdbcdn.b-cdn.net/img/new/standard/nature/117.webp" class="img-fluid" />
+              <a href="#!">
+                <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
+              </a>
+            </div>
+            <div class="card-body">
+              <h5 class="card-title">Card title 7</h5>
+              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+              <a href="#!" class="btn btn-primary">Button</a>
+            </div>
+          </div>
+        
+          <div class="card m-2" style="flex: 0 0 18rem;">
+            <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
+              <img src="https://mdbcdn.b-cdn.net/img/new/standard/nature/118.webp" class="img-fluid" />
+              <a href="#!">
+                <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
+              </a>
+            </div>
+            <div class="card-body">
+              <h5 class="card-title">Card title 8</h5>
+              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+              <a href="#!" class="btn btn-primary">Button</a>
+            </div>
+          </div>
+        
+          <div class="card m-2" style="flex: 0 0 18rem;">
+            <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
+              <img src="https://mdbcdn.b-cdn.net/img/new/standard/nature/119.webp" class="img-fluid" />
+              <a href="#!">
+                <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
+              </a>
+            </div>
+            <div class="card-body">
+              <h5 class="card-title">Card title 9</h5>
+              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+              <a href="#!" class="btn btn-primary">Button</a>
+            </div>
+          </div>
+        
+          <div class="card m-2" style="flex: 0 0 18rem;">
+            <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
+              <img src="https://mdbcdn.b-cdn.net/img/new/standard/nature/120.webp" class="img-fluid" />
+              <a href="#!">
+                <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
+              </a>
+            </div>
+            <div class="card-body">
+              <h5 class="card-title">Card title 10</h5>
+              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+              <a href="#!" class="btn btn-primary">Button</a>
+            </div>
+          </div>
+        
+          <div class="card m-2" style="flex: 0 0 18rem;">
+            <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
+              <img src="https://mdbcdn.b-cdn.net/img/new/standard/nature/121.webp" class="img-fluid" />
+              <a href="#!">
+                <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
+              </a>
+            </div>
+            <div class="card-body">
+              <h5 class="card-title">Card title 11</h5>
+              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+              <a href="#!" class="btn btn-primary">Button</a>
+            </div>
+          </div>
+        
+          <div class="card m-2" style="flex: 0 0 18rem;">
+            <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
+              <img src="https://mdbcdn.b-cdn.net/img/new/standard/nature/122.webp" class="img-fluid" />
+              <a href="#!">
+                <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
+              </a>
+            </div>
+            <div class="card-body">
+              <h5 class="card-title">Card title 12</h5>
+              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+              <a href="#!" class="btn btn-primary">Button</a>
+            </div>
+          </div>
+        </div>
+        
+        
+
+      </div>
+    
+
+      <div style="padding: 20px;">
+        <hr>
+        <h1 style="text-align: center;">Les reboisements non gouvernementaux</h1>
+        <div style="display: flex; justify-content: center; margin-top: 20px;">
+          <!-- Exemple de carte -->
+<div class="card mb-3" style="width: 95%; background-color: #e1e2e4;">
+  <div class="row g-0">
+    <div class="col-md-4">
+      <img src="{% static 'img/image3.jpg' %}" class="img-fluid rounded-start" alt="...">
+    </div>
+    <div class="col-md-8">
+      <div class="card-body">
+        <h5 class="card-title">Card title</h5>
+        <p class="card-text truncated-text">Cette carte contient un texte plus long que vous pouvez afficher complètement en cliquant sur "Voir plus". Le texte de la carte peut être plus ou moins long selon les besoins. Voici un texte d'exemple pour illustrer cela.</p>
+        <button class="toggle-btn btn btn-link">Voir plus</button>
+        <p class="card-text">
+          <small class="text-body-secondary">Publié le: <strong>01/01/2024</strong></small><br>
+          <small class="text-body-secondary">Publié il y a: <strong>3 jours</strong></small>
+        </p>
+      </div>
+      <div class="card-footer d-flex justify-content-between align-items-center">
+        <small class="text-body-secondary">
+          <i class="fas fa-comment" style="font-size: 25px; color: rgb(92, 100, 107); margin-right: 20px;"></i> : <strong style="font-size: 20px; margin-left: 10px;">5</strong>
+        </small>
+        <small class="text-body-secondary">
+          <i class="fas fa-thumbs-up" style="font-size: 25px; color: rgb(8, 132, 226); margin-right: 20px;"></i> : <strong  style="font-size: 20px; margin-left: 10px;">4</strong>
+        </small>
+      </div>
+    </div>
+  </div>
+</div>
+
+        </div>
+      </div>
+
+
+      <div style="padding: 20px;">
+        <hr>
+        <h1 style="text-align: center;">Les reboisements d association </h1>
+        <div style="display: flex; justify-content: center; margin-top: 20px;">
+          <div class="card mb-3" style="width: 95%; background-color: #e1e2e4;">
+            <div class="row g-0">
+              <div class="col-md-4">
+                <img src="{% static 'img/image3.jpg' %}" class="img-fluid rounded-start" alt="...">
+              </div>
+              <div class="col-md-8">
+                <div class="card-body">
+                  <h5 class="card-title">Card title</h5>
+                  <p class="card-text truncated-text">Cette carte contient un texte plus long que vous pouvez afficher complètement en cliquant sur "Voir plus". Le texte de la carte peut être plus ou moins long selon les besoins. Voici un texte d'exemple pour illustrer cela.</p>
+                  <button class="toggle-btn btn btn-link">Voir plus</button>
+                  <p class="card-text">
+                    <small class="text-body-secondary">Publié le: <strong>01/01/2024</strong></small><br>
+                    <small class="text-body-secondary">Publié il y a: <strong>3 jours</strong></small>
+                  </p>
+                </div>
+                <div class="card-footer d-flex justify-content-between align-items-center">
+                  <small class="text-body-secondary">
+                    <i class="fas fa-comment" style="font-size: 25px; color: rgb(92, 100, 107); margin-right: 20px;"></i> : <strong style="font-size: 20px; margin-left: 10px;">5</strong>
+                  </small>
+                  <small class="text-body-secondary">
+                    <i class="fas fa-thumbs-up" style="font-size: 25px; color: rgb(8, 132, 226); margin-right: 20px;"></i> : <strong  style="font-size: 20px; margin-left: 10px;">4</strong>
+                  </small>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+</section>
+
+<section id="reboisement" class="section">
+   <p>reboisemne</p>
+</section>
+
+<section id="cartographie" class="section mt-5">
+  <div id="map" style="height: 600px; border: 1px solid #ddd;"></div>
+
+    <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"></script>
+    <script>
+        var map = L.map('map').setView([12.2383, -1.5616], 7);
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            maxZoom: 20,
+        }).addTo(map);
+    </script>
+</section>
+
+
+
+
+<section id="statistiques" class="section">
+    <p>statistiques</p>
+</section>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const toggleButtons = document.querySelectorAll('.toggle-btn');
+    
+    toggleButtons.forEach(button => {
+      const cardText = button.previousElementSibling; // Trouve le texte juste avant le bouton
+      const fullText = cardText.textContent;
+      const truncatedText = fullText.length > 100 ? fullText.slice(0, 100) + '...' : fullText;
+
+      // Initialisez le texte tronqué
+      cardText.textContent = truncatedText;
+      cardText.classList.add('truncate-text');
+
+      // Gestion du clic sur le bouton
+      button.addEventListener('click', () => {
+        if (cardText.classList.contains('truncate-text')) {
+          cardText.textContent = fullText;
+          cardText.classList.remove('truncate-text');
+          button.textContent = 'Voir moins';
+        } else {
+          cardText.textContent = truncatedText;
+          cardText.classList.add('truncate-text');
+          button.textContent = 'Voir plus';
+        }
+      });
+    });
+  });
+</script>
+
+{% endblock %}

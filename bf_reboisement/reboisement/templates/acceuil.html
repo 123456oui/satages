@@ -1,0 +1,842 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta http-equiv="x-ua-compatible" content="ie=edge" />
+        <title>Bf_Reboisement</title>
+        
+        <!-- MDB icon -->
+        <link href="{% static 'css/mdb.min.css' %}" rel="stylesheet" type="text/css"/>
+        <link rel="icon" href="{% static 'img/icon.jpeg' %}" type="image/x-icon" />
+        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css" />
+        <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+
+        <!-- Font Awesome -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+
+        <!-- Google Fonts Roboto -->
+        <ink rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap" />
+        <link rel="stylesheet" href="{% static 'css/acceuil.css' %}">
+    </head>
+    <body>
+        <!-- Conteneur en haut -->
+        <div class="top-container">
+            <div class="left">
+                <img src="{% static 'img/bf.jpeg' %}" alt="">
+            </div>
+            <div class="center">
+                <h2 style="color: white;">Burkina Reboisement</h2>
+            </div>;
+            <div class="right">
+                <img src="{% static 'img/bf.jpeg' %}" alt="">
+            </div>
+        </div>
+        
+
+        <!-- Conteneurs alignés horizontalement -->
+        <div class="horizontal-containers">
+            <div class="left-container">
+              <div class="button-container">
+                <div class="button-wrapper">
+                    <button class="btn btn-primary" id="btn-accueil">
+                        <i class="fas fa-home"></i> Accueil
+                    </button>
+                </div>
+                <div class="button-wrapper">
+                    <button class="btn btn-primary" id="btn-activite">
+                        <i class="fas fa-tree"></i> Activité
+                    </button>
+                </div>
+                <div class="button-wrapper">
+                    <button class="btn btn-primary" id="btn-structure">
+                        <i class="fas fa-building"></i> Structure
+                    </button>
+                </div>
+                <div class="button-wrapper">
+                    <button class="btn btn-primary" id="btn-utilisateur">
+                        <i class="fas fa-user"></i> Utilisateur
+                    </button>
+                </div>
+                <div class="button-wrapper">
+                    <button class="btn btn-primary" id="btn-site">
+                        <i class="fas fa-user"></i> Sites
+                    </button>
+                </div>
+            </div>
+            <div class="compte" style="display: flex; background-color: #07946f;  padding-top: 10px;color: white;"> 
+                <i class="far fa-circle-user" style="font-size : 26px; margin-left: 20px;"></i>
+                <p style=" margin-left: 20px; box-shadow: 20px 20px 20px rgba(254, 254, 254, 0.2);"> Utilisateur</p>
+            </div>
+            </div>
+            <div class="right-container">
+               <div id="affiche">
+                <div id="acceuil">
+                    <div id="haut">
+                        <div class="box">
+                            <h4 class="text-center"> Sites</h4>
+                            <p class="text-center" > <strong>Total :</strong> 09 </p>
+                        </div>
+                        <div class="box">
+                            <h4 class="text-center"> Activite</h4>
+                            <p class="text-center" > <strong>Total :</strong> 19 </p>
+                        </div>
+                        <div class="box">
+                            <h4 class="text-center"> Acteurs</h4>
+                            <p class="text-center" > <strong>Total :</strong> 09 </p>
+                        </div>
+                        <div class="box">
+                            <h4 class="text-center">Partenaires</h4>
+                            <p class="text-center" > <strong>Total :</strong> 09 </p>
+                        </div>
+                        <div class="box">
+                            <h4 class="text-center"> Localite</h4>
+                            <p class="text-center" > <strong>Total :</strong> 09 </p>
+                        </div>
+                        <div class="box">
+                            <h4 class="text-center"> Structures</h4>
+                            <p class="text-center" > <strong>Total :</strong> 09 </p>
+                        </div>
+                    </div>
+                    <div id="bas">
+                        <div class="gauche">
+                            <canvas id="myChart"></canvas>
+                        </div>
+                        <div class="bas-box">
+                            <img src="{% static 'img/hist.jpeg' %}" style="width: 100%; height: 100%;" alt="">
+                        </div>
+                    </div>
+                </div>
+                <div id="activite">
+                    <div class="inner-div" id="acc">
+                        <div class="top-div">
+                            <h3>Activité</h3>
+                            <span class="plus-icon" id="addactivite">+</span>
+                        </div>
+                        <div class="bottom-div">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Date</th>
+                                        <th>Acteur</th>
+                                        <th>Nb Plante</th>
+                                        <th>Nb Participant</th>
+                                        <th> Localite</th>
+                                        <th>Statut</th>
+                                        <th>Edition</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>2024-09-01</td>
+                                        <td>John Doe</td>
+                                        <td>50</td>
+                                        <td>10</td>
+                                        <td>fada</td>
+                                        <td>Complété</td>
+                                        <td><i class="modifier-icon" data-id="1" style="margin-right: 15px;cursor: pointer;">✏️</i> <i class="delete-icon" data-id="1" style="cursor: pointer;">🗑️ </i> </td>
+
+                                    </tr>
+                                    <tr>
+                                        <td>2024-09-02</td>
+                                        <td>Jane Smith</td>
+                                        <td>75</td>
+                                        <td>15</td>
+                                        <td>fada</td>
+                                        <td>En cours</td>
+                                        <td><i class="modifier-icon" data-id="2" style="margin-right: 15px;cursor: pointer;">✏️</i>  <i class="delete-icon" data-id="2" style="cursor: pointer;"> 🗑️ </i> </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <div class="inner-div" id="form" style="display: none;" >
+                        <div class="top-div">
+                            <h3>Activité</h3>
+                            <span class="ret-icon" id="retourliste"> <i class="fas fa-circle-left"></i> </span>
+                        </div>
+                        <div class="bottom-div">
+                            <div class="horizontal-div" id="formactivite">
+                                <div class="text-center">
+                                    <h4 style="color:rgb(25, 7, 227);">Formulaire d'activité</h4>
+                                </div>
+                            
+                                <!-- Formulaire pour les activités -->
+                                <form action="" method="POST" style="padding: 40px;">
+                            
+                                    <!-- Champ pour la date de l'activité -->
+                                    <div class="form-group" style="margin-bottom: 10px;">
+                                        <label for="date-activite" style="margin-bottom: 5px;">Date de l'activité</label>
+                                        <input type="date" class="form-control" id="date-activite" name="date_activite">
+                                    </div>
+                            
+                                    <!-- Champ pour le nombre de plantes -->
+                                    <div class="form-group" style="margin-bottom: 10px;">
+                                        <label for="nb-plantes" style="margin-bottom: 5px;">Nombre de plantes</label>
+                                        <input type="number" class="form-control" id="nb-plantes" name="nb_plantes" min="0" step="1" placeholder="Entrez le nombre de plantes">
+                                    </div>
+                            
+                                    <!-- Champ pour le nombre de participants -->
+                                    <div class="form-group" style="margin-bottom: 10px;">
+                                        <label for="nb-participants" style="margin-bottom: 5px;">Nombre de participants</label>
+                                        <input type="number" class="form-control" id="nb-participants" name="nb_participants" min="0" step="1" placeholder="Entrez le nombre de participants">
+                                    </div>
+                            
+                                    <!-- Champ de sélection pour les acteurs -->
+                                    <div class="form-group" style="margin-bottom: 10px;">
+                                        <label for="acteur" style="margin-bottom: 5px;">Sélectionner l'acteur</label>
+                                        <select class="form-control" id="acteur" name="acteur">
+                                            <option value="" disabled selected>Choisissez un acteur</option>
+                                            <!-- Ajoutez ici les options pour les acteurs -->
+                                            <option value="acteur1">Acteur 1</option>
+                                            <option value="acteur2">Acteur 2</option>
+                                            <option value="acteur3">Acteur 3</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group" style="margin-bottom: 10px;">
+                                        <label for="acteur" style="margin-bottom: 5px;">Sélectionner le partenaire</label>
+                                        <div class="input-group">
+                                            <select class="form-control" id="partenaire" name="partenaire">
+                                                <option value="" disabled selected>Choisissez un partenaire</option>
+                                                <!-- Ajoutez ici les options pour les acteurs -->
+                                                <option value="acteur1">Acteur 1</option>
+                                                <option value="acteur2">Acteur 2</option>
+                                                <option value="acteur3">Acteur 3</option>
+                                            </select>
+                                            <div class="input-group-append">
+                                                <button class="btn btn-outline-secondary" type="button" style="background-color: #06b788; color: white;" onclick="addDiv()">
+                                                    <i class="fas fa-plus"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                        <div id="list">
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                            
+                            <div class="horizontal-div">
+                                <div class="text-center">
+                                    <h4 style="color:rgb(25, 7, 227);"> types de plantes </h4>
+                                </div>
+                                <div class="scrollable-div" id="scrollable-div">
+                                    <div class="plant-input-container">
+                                        <!-- ComboBox pour sélectionner une plante -->
+                                        <div class="form-group">
+                                            <label for="plant-select">Type de plante</label>
+                                            <select id="plant-select" class="form-control">
+                                                <option value="" disabled selected>type de plante</option>
+                                                <option value="plante1">Plante 1</option>
+                                                <option value="plante2">Plante 2</option>
+                                                <option value="plante3">Plante 3</option>
+                                            </select>
+                                        </div>
+                                    
+                                        <!-- Champ de saisie pour le nombre de plantes -->
+                                        <div class="form-group">
+                                            <label for="nb-plantes">Nombre de plantes</label>
+                                            <input type="number" id="nb-plantes" class="form-control" min="0" placeholder="0">
+                                        </div>
+                                    
+                                        <!-- Bouton "Plus" -->
+                                        <button class="btn btn-plus" id="btn-plus">+</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="horizontal-div">
+                                <div class="text-center">
+                                    <h4 style="color:rgb(25, 7, 227);"> loscalisation </h4>
+                                </div>
+                                <div class="scrollable-container" id="info-container">
+                                    <div class="form-group" style="margin-bottom: 10px;">
+                                        <label for="acteur" style="margin-bottom: 5px;">selectionner la Localite</label>
+                                        <select class="form-control" id="acteur" name="acteur">
+                                            <option value="" disabled selected>Localite</option>
+                                            <!-- Ajoutez ici les options pour les acteurs -->
+                                            <option value="acteur1">loc 1</option>
+                                            <option value="acteur2">loc 2</option>
+                                            <option value="acteur3">loc 3</option>
+                                        </select>
+                                    </div>
+                                    <div class="info-box"   >
+                                        
+                                        <div class="field-group">
+                                            <label for="longitude1">Longitude:</label>
+                                            <input type="text" id="longitude1" name="longitude1">
+                                        </div>
+                                        <div class="field-group">
+                                            <label for="latitude1">Latitude:</label>
+                                            <input type="text" id="latitude1" name="latitude1">
+                                        </div>
+                                    </div>
+                                    <div class="info-box">
+                                        <div class="field-group">
+                                            <label for="longitude2">Longitude:</label>
+                                            <input type="text" id="longitude2" name="longitude2">
+                                        </div>
+                                        <div class="field-group">
+                                            <label for="latitude2">Latitude:</label>
+                                            <input type="text" id="latitude2" name="latitude2">
+                                        </div>
+                                    </div>
+                                    <div class="info-box">
+                                        <div class="field-group">
+                                            <label for="longitude3">Longitude:</label>
+                                            <input type="text" id="longitude3" name="longitude3">
+                                        </div>
+                                        <div class="field-group">
+                                            <label for="latitude3">Latitude:</label>
+                                            <input type="text" id="latitude3" name="latitude3">
+                                        </div>
+                                    </div>
+                                    <button class="more-button " onclick="addField()"><i class="fas fa-plus"></i></button>
+                                </div>
+                                <button id="soumettre" class="btn btn-primary btn-block" style="margin-top:10px ;">Envoyer</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="inner-div" id="modif" style="display: none;" >
+                        <div class="top-div">
+                            <h3>Activité</h3>
+                            <span class="ret-icon" id="retourliste"> <i class="fas fa-circle-left"></i> </span>
+                        </div>
+                        <div class="bottom-div">
+                            <div class="container">
+                                <!-- Première colonne : Infos textuelles -->
+                                <div class="column info-text">
+                                    <h3>Informations</h3>
+                                    <p style="margin-right: 30px;"><strong>Date : </strong>2024-09-10</p>
+                                    <input type="datetime" name="moddate" id="">
+                                    <p style="margin-right: 30px;"><strong>Acteur : </strong>John Doe</p>
+                                    <select name="acteur" id="">
+                                        <option value="act1">acteur1</option>
+                                        <option value="act1">acteur3</option>
+                                    </select>
+                                    <p style="margin-right: 30px;"><strong>Nombre de plantes :</strong> 150</p>
+                                    <input type="number" name="nbplante" id="">
+                                    <p style="margin-right: 30px;"><strong>nombre de participants : </strong>20</p>
+                                    <input type="number" name="nbparticipant" id="">
+                                    <p style="margin-right: 30px;"><strong>Localité : </strong>Ouagadougou</p>
+                                    <select name="localite" id="">
+                                        <option value="">localite1</option>
+                                        <option value="">localite3</option>
+                                    </select>
+                                    <p style="margin-right: 30px;"><strong>Dernière modification : </strong>2024-09-09</p>
+                                    <p style="margin-right: 30px;"><strong>Structure : </strong>Reboisement Burkina</p>
+                                </div>
+                        
+                                <!-- Deuxième colonne : Longitude/Latitude et bouton Plus -->
+                                <div class="column location">
+                                    <h3>Site :</h3>
+                                    <div class="location-input">
+                                        <label for="longitude">Longitude :</label>
+                                        <input type="text" id="longitude" placeholder="Entrez la longitude">
+                        
+                                        <label for="latitude">Latitude :</label>
+                                        <input type="text" id="latitude" placeholder="Entrez la latitude">
+                        
+                                        <button id="add-field" onclick="addFields2()">➕ Ajouter</button>
+                                    </div>
+                                    <div class="d-flex justify-content-end">
+                                        <button type="button" class="btn btn-primary w-100">Modifier</button>
+                                    </div>                                  
+                                </div>
+                        
+                                <!-- Troisième colonne : Carte -->
+                                <div class="column map-container">
+                                    <div id="map" class="map"></div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                    </div>
+
+                </div>
+                <div id="structure">
+                    <div class="inner-div" style="display: block;" id="list">
+                        <div class="top-div">
+                           <h3>structure</h3>
+                        </div>
+                        <div class="bottom-div">
+                            <div class="table-container">
+                                <table class="tabl">
+                                    <thead>
+                                        <tr>
+                                            <th>Nom</th>
+                                            <th>Mail</th>
+                                            <th>Type</th>
+                                            <th>Edition</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <!-- Contenu du tableau -->
+                                        <tr  data-nom="John Doe" data-mail="john.doe@example.com" data-type="Admin">
+                                            <td>John Doe</td>
+                                            <td>john.doe@example.com</td>
+                                            <td>Admin</td>
+                                            <td><i class="fas fa-trash" style="color: darkred; cursor: pointer;"></i></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                    
+                            <!-- Conteneur de formulaire -->
+                            <div class="form-container">
+                                <!-- Image -->
+                                <div class="form-image">
+                                    <img src="{% static 'img/bf.jpeg' %}" alt="Image"  style="width: auto;height: 100%;">
+                                </div>
+                    
+                                <!-- Formulaire -->
+                                <div class="form-content">
+                                    <input type="text"  id="Nom" placeholder="Nom de la Structure" class="form-control">
+                                    <input type="email" id="Mail" placeholder="Mail de la Structure" class="form-control">
+                                    <input type="file" placeholder="Logo (photo)" class="form-control">
+                                    <select id="type" class="form-control">
+                                        <option value="">Type</option>
+                                        <option value="type1">Type 1</option>
+                                        <option value="type2">Type 2</option>
+                                    </select>
+                                    <button type="button" class="btn btn-primary">Ajouter</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="utilisateur">
+                    <div class="inner-div" style="display: block;" id="list">
+                        <div class="top-div">
+                           <h3>Utilisateurs</h3>
+                        </div>
+                        <div class="bottom-div">
+                            <div class="table-container">
+                                <table class="tab">
+                                    <thead>
+                                        <tr>
+                                            <th>Nom</th>
+                                            <th>PreNom</th>
+                                            <th>Mail</th>
+                                            <th>Mot de Passe</th>
+                                            <th>Edition</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <!-- Contenu du tableau -->
+                                        <tr  data-nomu="John Doe" data-mailu="john.doe@example.com" data-typeu="password" data-prenomu="Smith">
+                                            <td>John Doe</td>
+                                            <td>Smith</td>
+                                            <td>john.doe@example.com</td>
+                                            <td>*********</td>
+                                            <td><i class="fas fa-trash" style="color: darkred; cursor: pointer;"></i></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                    
+                            <!-- Conteneur de formulaire -->
+                            <div class="form-container">
+                                <!-- Image -->
+                                <div class="form-image">
+                                    <img src="{% static 'img/bf.jpeg' %}" alt="Image"  style="width: auto;height: 100%;">
+                                </div>
+                    
+                                <!-- Formulaire -->
+                                <div class="form-content">
+                                    <input type="text"  id="Nomu" placeholder="nom de l utilisateur" class="form-control">
+                                    <input type="text"  id="PreNomu" placeholder="Prenom de l'Utilisateur" class="form-control">
+                                    <input type="email" id="Mailu" placeholder="Mail de l Utilisateur" class="form-control">
+                                    <div class="form-group password-container">
+                                        <input type="password" class="form-control" id="password" placeholder=" mot de passe">
+                                        <span class="password-toggle" onclick="togglePassword()">
+                                            <img id="toggle-icon" style="color:#ddd;" src="https://img.icons8.com/ios-glyphs/30/000000/visible.png"/>
+                                        </span>
+                                    </div>
+                                    <button type="button" class="btn btn-primary" id="useradd">Ajouter</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="Site">
+                    <div style="display: block;width: 100%; height: 100%;">
+                        <div id="maps" style="width: 100%; height: 100%;"></div>
+                    </div>
+                </div>
+               </div>
+            </div>
+        </div>
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.2.1/mdb.min.js"></script>
+        <script src="https://mdbcdn.b-cdn.net/js/mdb.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
+        <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+        <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+        <script src="{% static 'js/mdb.min.js' %}"></script>
+        <script src="{% static 'js/acceuil.js' %}"></script>
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        // Données pour l'histogramme
+        const data = {
+            labels: ['Localité 1', 'Localité 2', 'Localité 3', 'Localité 4', 'Localité 5'],
+            datasets: [{
+                label: 'Nombre d\'activités',
+                data: [12, 19, 3, 5, 2],
+                backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                borderColor: 'rgba(75, 192, 192, 1)',
+                borderWidth: 1
+            }]
+        };
+
+        // Configuration de l'histogramme
+        const config = {
+            type: 'bar',
+            data: data,
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        };
+
+        // Initialisation de l'histogramme
+        const myChart = new Chart(
+            document.getElementById('myChart'),
+            config
+        );
+    </script>
+        <script>
+
+            var map = L.map('map').setView([12.368, -1.527], 13); // Coordonnées de Ouagadougou
+
+            // Ajouter une couche de carte OpenStreetMap
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                maxZoom: 19,
+                attribution: '© OpenStreetMap'
+            }).addTo(map);
+
+            // Ajouter la couche satellite
+            var satelliteLayer = L.tileLayer('https://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png', {
+                maxZoom: 19,
+                attribution: '© OpenStreetMap'
+            });
+
+            // Ajout d'un bouton pour basculer entre la vue normale et la vue satellite
+            var baseLayers = {
+                "Vue Normale": L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { maxZoom: 19 }),
+                "Vue Satellite": satelliteLayer
+            };
+
+            L.control.layers(baseLayers).addTo(map);
+
+            document.addEventListener('DOMContentLoaded', function () {
+                // Sélectionner les boutons
+                const btnAccueil = document.getElementById('btn-accueil');
+                const btnActivite = document.getElementById('btn-activite');
+                const btnStructure = document.getElementById('btn-structure');
+                const btnUtilisateur = document.getElementById('btn-utilisateur');
+                const btnsite = document.getElementById('btn-site');
+
+                // Sélectionner les divs
+                const divAccueil = document.getElementById('acceuil');
+                const divActivite = document.getElementById('activite');
+                const divStructure = document.getElementById('structure');
+                const divUtilisateur = document.getElementById('utilisateur');
+                const divsite = document.getElementById('Site');
+
+                // Fonction pour masquer tous les divs
+                function hideAllDivs() {
+                    divAccueil.style.display = 'none';
+                    divActivite.style.display = 'none';
+                    divStructure.style.display = 'none';
+                    divUtilisateur.style.display = 'none';
+                    divsite.style.display='none';
+                }
+
+                // Ajouter des événements de clic pour chaque bouton
+                btnAccueil.addEventListener('click', function () {
+                    hideAllDivs();
+                    divAccueil.style.display = 'block';
+                });
+
+                btnActivite.addEventListener('click', function () {
+                    hideAllDivs();
+                    divActivite.style.display = 'block';
+                });
+
+                btnStructure.addEventListener('click', function () {
+                    hideAllDivs();
+                    divStructure.style.display = 'block';
+                });
+
+                btnUtilisateur.addEventListener('click', function () {
+                    hideAllDivs();
+                    divUtilisateur.style.display = 'block';
+                });
+                btnsite.addEventListener('click', function () {
+                    hideAllDivs();
+                    divsite.style.display = 'block';
+                    initMap()
+                });
+                // Afficher la section "Accueil" par défaut au chargement de la page
+                hideAllDivs();
+                divAccueil.style.display = 'block';
+            });
+            const addactivite = document.getElementById('addactivite');
+            const retourliste =  document.querySelectorAll('.ret-icon');
+            const form = document.getElementById('form');
+            const acc = document.getElementById('acc');
+            const mod = document.getElementById('modif');
+            addactivite.addEventListener('click', function () {
+                acc.style.display = 'none';
+                form.style.display = 'block';
+                 mod.style.display = 'none';  
+                });
+
+             retourliste.forEach(element => {
+                    element.addEventListener('click', () => {
+                        form.style.display = 'none';
+                        acc.style.display = 'block';
+                        mod.style.display = 'none';
+                    });
+                });
+
+                function modi(id) {
+                    form.style.display = 'none';
+                    acc.style.display = 'none';
+                    mod.style.display = 'block';
+                    console.log('ID sélectionné :', id);
+                }
+                
+                function afficherId(id) {
+                    console.log('ID sélectionné :', id);
+                }
+
+                function confirmerSuppression(id) {
+                    // Boîte de dialogue de confirmation
+                    const confirmation = confirm("Êtes-vous sûr de vouloir supprimer cet élément ?");
+                    if (confirmation) {
+                        console.log('ID à supprimer :', id);
+                        // Ici, vous pouvez ajouter une logique de suppression si nécessaire
+                    } else {
+                        console.log('Suppression annulée pour l\'ID :', id);
+                    }
+                }
+
+                const deleteIcons = document.querySelectorAll('.delete-icon');
+                deleteIcons.forEach(icon => {
+                    icon.addEventListener('click', () => {
+                        const id = icon.getAttribute('data-id'); // Récupère l'ID à partir de 'data-id'
+                        confirmerSuppression(id); // Demande confirmation avant la suppression
+                    });
+                });
+
+                const modifierIcons = document.querySelectorAll('.modifier-icon');
+                modifierIcons.forEach(icon => {
+                    icon.addEventListener('click', () => {
+                        const id = icon.getAttribute('data-id');
+                        modi(id);
+                    });
+                });
+
+                document.getElementById('btn-plus').addEventListener('click', function() {
+                    // Créer un nouveau div qui contiendra le ComboBox, le champ de nombre, et le bouton
+                    let newDiv = document.createElement('div');
+                    newDiv.classList.add('plant-input-container');
+
+                    // Le contenu HTML du nouveau div
+                    newDiv.innerHTML = `
+                        <div class="form-group">
+                            <label for="plant-select">Type de plante</label>
+                            <select id="plant-select" class="form-control">
+                                <option value="" disabled selected>Choisissez une plante</option>
+                                <option value="plante1">Plante 1</option>
+                                <option value="plante2">Plante 2</option>
+                                <option value="plante3">Plante 3</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="nb-plantes">Nombre de plantes</label>
+                            <input type="number" class="form-control" id="nb-plantes" min="0" placeholder="0">
+                        </div>
+                    `;
+
+                    // Ajouter le nouveau div au conteneur parent
+                    document.getElementById('scrollable-div').appendChild(newDiv);
+                });
+
+                function generateUniqueId() {
+                    return 'field-' + new Date().getTime(); // Génère un ID unique basé sur le timestamp actuel
+                }
+
+                function addField() {
+                    // Récupérer les valeurs des champs existants
+                    const container = document.getElementById('info-container');
+                    const infoBoxes = container.querySelectorAll('.info-box');
+
+                    infoBoxes.forEach((box, index) => {
+                        const longitudeInput = box.querySelector('input[type="text"]:first-of-type');
+                        const latitudeInput = box.querySelector('input[type="text"]:last-of-type');
+                        
+                        console.log(`Box ${index + 1} - Longitude: ${longitudeInput.value}, Latitude: ${latitudeInput.value}`);
+                    });
+
+                    // Ajouter un nouveau champ
+                    const newBox = document.createElement('div');
+                    newBox.classList.add('info-box');
+
+                    const uniqueLongitudeId = generateUniqueId();
+                    const uniqueLatitudeId = generateUniqueId();
+
+                    const longitudeField = document.createElement('div');
+                    longitudeField.classList.add('field-group');
+                    longitudeField.innerHTML = `
+                        <label for="${uniqueLongitudeId}">Longitude:</label>
+                        <input type="text" id="${uniqueLongitudeId}" name="${uniqueLongitudeId}">
+                    `;
+
+                    const latitudeField = document.createElement('div');
+                    latitudeField.classList.add('field-group');
+                    latitudeField.innerHTML = `
+                        <label for="${uniqueLatitudeId}">Latitude:</label>
+                        <input type="text" id="${uniqueLatitudeId}" name="${uniqueLatitudeId}">
+                    `;
+
+                    newBox.appendChild(longitudeField);
+                    newBox.appendChild(latitudeField);
+
+                    container.insertBefore(newBox, document.querySelector('.more-button'));
+                }
+
+                function addFields2() {
+                    const locationInputDiv = document.querySelector('.location-input');
+
+                    const newLongitudeLabel = document.createElement('label');
+                    newLongitudeLabel.innerText = 'Longitude :';
+                    const newLongitudeInput = document.createElement('input');
+                    newLongitudeInput.type = 'text';
+                    newLongitudeInput.placeholder = 'Entrez la longitude';
+                    
+                    const newLatitudeLabel = document.createElement('label');
+                    newLatitudeLabel.innerText = 'Latitude :';
+                    const newLatitudeInput = document.createElement('input');
+                    newLatitudeInput.type = 'text';
+                    newLatitudeInput.placeholder = 'Entrez la latitude';
+
+                    locationInputDiv.appendChild(newLongitudeLabel);
+                    locationInputDiv.appendChild(newLongitudeInput);
+                    locationInputDiv.appendChild(newLatitudeLabel);
+                    locationInputDiv.appendChild(newLatitudeInput);
+                }
+
+                function addDiv() {
+            const container = document.getElementById('list');
+            const newDiv = document.createElement('div');
+            newDiv.className = 'inner-div';
+            newDiv.innerHTML = `
+                <div class="form-group" style="margin-bottom: 10px; margin-top: 10px;">
+                                        <label for="acteur" style="margin-bottom: 5px;">Sélectionner le partenaire</label>
+                                        <div class="input-group">
+                                            <select class="form-control" id="acteur" name="acteur">
+                                                <option value="" disabled selected>Choisissez un partenaire</option>
+                                                <!-- Ajoutez ici les options pour les acteurs -->
+                                                <option value="acteur1">Acteur 1</option>
+                                                <option value="acteur2">Acteur 2</option>
+                                                <option value="acteur3">Acteur 3</option>
+                                            </select>
+                                        </div>
+                                    </div>
+            `;
+            container.appendChild(newDiv);
+        }
+
+        function populateForm(row) {
+            document.getElementById('Nom').value = row.getAttribute('data-nom');
+            document.getElementById('Mail').value = row.getAttribute('data-mail');
+            document.getElementById('type').value = row.getAttribute('data-type');
+        }
+        function populateForm2(row) {
+            document.getElementById('Nomu').value = row.getAttribute('data-nomu');
+            document.getElementById('Mailu').value = row.getAttribute('data-mailu');
+            document.getElementById('password').value = row.getAttribute('data-typeu');
+            document.getElementById('PreNomu').value = row.getAttribute('data-prenomu');
+
+        }
+        document.querySelectorAll('.tab tbody tr').forEach(row => {
+            row.addEventListener('click', function() {
+                populateForm2(this);
+            });
+        });
+        document.querySelectorAll('.tabl tbody tr').forEach(row => {
+            row.addEventListener('click', function() {
+                populateForm(this);
+            });
+        });
+
+        function togglePassword() {
+        var passwordInput = document.getElementById("password");
+        var toggleIcon = document.getElementById("toggle-icon");
+
+        if (passwordInput.type === "password") {
+            passwordInput.type = "text";
+            toggleIcon.src = "https://img.icons8.com/ios-glyphs/30/000000/invisible.png"; // Icône "œil barré"
+        } else {
+            passwordInput.type = "password";
+            toggleIcon.src = "https://img.icons8.com/ios-glyphs/30/000000/visible.png"; // Icône "œil"
+        }
+    }
+
+    var map;
+
+        function initMap() {
+            // Vérifier si la carte est déjà initialisée
+            if (map !== undefined) {
+                map.remove();  // Supprimer l'ancienne carte avant de la recréer
+            }
+
+            // Initialiser la carte et la centrer sur Ouagadougou
+            map = L.map('maps').setView([12.3714, -1.5197], 12);
+
+            // Ajouter la couche OpenStreetMap (vue par défaut)
+            var osmLayer = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+            }).addTo(map);
+
+            // Ajouter la couche Mapbox (vue satellite)
+            var mapboxSatellite = L.tileLayer('https://api.mapbox.com/styles/v1/mapbox/satellite-v9/tiles/256/{z}/{x}/{y}?access_token=YOUR_MAPBOX_ACCESS_TOKEN', {
+                attribution: '&copy; <a href="https://www.mapbox.com/about/maps/">Mapbox</a> contributors',
+                maxZoom: 18,
+                tileSize: 256,
+                zoomOffset: 0,
+                accessToken: 'YOUR_MAPBOX_ACCESS_TOKEN'
+            });
+
+            // Ajouter un marqueur pour la ville de Ouagadougou
+            var marker = L.marker([12.3714, -1.5197]).addTo(map)
+                .bindPopup('Ouagadougou, capitale du Burkina Faso')
+                .openPopup();
+
+            // Contrôle de zoom pour la carte
+            L.control.zoom({
+                position: 'topright'
+            }).addTo(map);
+
+            // Contrôles pour basculer entre les différentes couches
+            var baseLayers = {
+                "Vue par défaut (OSM)": osmLayer,
+                "Vue satellite (Mapbox)": mapboxSatellite
+            };
+
+            L.control.layers(baseLayers).addTo(map);
+        }
+
+        </script>
+    </body>
+</html>

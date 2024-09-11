@@ -1,0 +1,544 @@
+/* Style pour les images dans le conteneur du haut */
+.top-container img {
+  width: 100px;
+  height: auto; /* Assure que les images maintiennent leur proportion */
+  margin: 2px;
+}
+
+/* Conteneur du haut */
+.top-container {
+  border-bottom: 1px solid #dee2e6;
+  background-color: #07946f;
+  height: 60px;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Positionnement des éléments du haut */
+.left, .right {
+  flex: 0;
+}
+
+.center {
+  flex: 1;
+  text-align: center;
+}
+
+/* Conteneurs alignés horizontalement */
+.horizontal-containers {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  height: calc(100vh - 60px); /* Ajuste la hauteur en fonction de la hauteur du conteneur du haut */
+}
+
+/* Conteneur à gauche */
+.left-container {
+  width: 20%;
+  background-color: #e9ecef;
+  padding: 20px;
+  border-right: 1px solid #dee2e6;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+/* Conteneur à droite */
+.right-container {
+  width: 80%;
+  background-color: #f8f9fa;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Conteneur d'affichage */
+#affiche {
+  flex: 1; /* Occupe tout l'espace disponible */
+  overflow: hidden; /* Masque les débordements */
+  display: flex;
+  flex-direction: column; /* Permet aux sections de s'aligner verticalement */
+}
+
+/* Sections internes */
+#affiche > div {
+  display: none;  /* Masque toutes les sections par défaut */
+  flex: 1; /* Permet à chaque section d'occuper tout l'espace disponible dans #affiche */
+  overflow-y: auto; /* Permet le défilement vertical lorsque le contenu dépasse */
+  padding: 20px; /* Ajoute du padding pour le contenu */ 
+}
+#activite {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%; /* Assurez-vous que le parent a une hauteur définie */
+}
+#structure {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+#structure > div {
+  flex: 1; /* Permet à chaque section d'occuper tout l'espace disponible dans #affiche */
+  overflow-y: auto; /* Permet le défilement vertical lorsque le contenu dépasse */
+  padding: 20px; /* Ajoute du padding pour le contenu */ 
+}
+.inner-div {
+  width: 100%;
+  height: 100%;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  background-color: white; /* Optionnel, pour mieux voir le box-shadow */
+}
+
+.top-div {
+  height: 10%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+.top-div h3 {
+  margin: 0;
+  flex: 1;
+  text-align: center;
+  color: #07946f;
+}
+
+.plus-icon {
+  position: absolute;
+  right: 20px;
+  color: rgb(25, 7, 227);
+  font-size: 26px;
+  background-color: #e0e1e1;
+  width: 40px;
+  text-align: center;
+  cursor: pointer;
+}
+.plus-icon:hover{
+  font-size: 30px;
+  color: #07946f;
+  width: 60px;
+  right: 10px;
+}
+.ret-icon {
+  position: absolute;
+  right: 20px;
+  color: rgb(25, 7, 227);
+  font-size: 26px;
+  background-color: #e0e1e1;
+  width: 40px;
+  text-align: center;
+  cursor: pointer;
+}
+.ret-icon:hover{
+  font-size: 30px;
+  color: #07946f;
+  width: 60px;
+  right: 10px;
+}
+
+
+.bottom-div {
+  height: 90%;
+  overflow: auto;
+  padding: 10px;
+  display: flex;
+  flex-direction: row;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th {
+  background-color: #07946f;
+  color: white;
+  padding: 10px;
+  text-align: center;
+}
+
+td {
+  text-align: center;
+  padding: 10px;
+  border: 1px solid #ebeaea;
+}
+.horizontal-div {
+  flex: 1;
+  height: 96%;
+  background-color: rgb(237, 237, 237); /* Optionnel, pour visualiser les sections */
+  margin: 5px; /* Optionnel, pour espacer les divs */
+}
+
+.form-outline .form-label {
+  color: #084078; /* Couleur du label par défaut */
+}
+
+.form-outline .form-control:focus~.form-label {
+  color: #07946f; /* Couleur du label lors du focus */
+}
+
+.form-outline .form-control:focus {
+  border-color: #07946f; /* Couleur de la bordure lors du focus */
+}
+
+.scrollable-div {
+  padding: 10px;
+  flex: 1;
+  overflow-y: auto;
+  position: relative;
+  max-height: 90%; /* Ajuste selon le besoin */
+  overflow-y: auto; /* Ajoute une barre de défilement verticale si nécessaire */
+  padding: 10px;
+}
+.scrollable-div::-webkit-scrollbar {
+  width: 0px; /* Cache la barre de défilement */
+  background: transparent; /* Assure que le fond est transparent */
+}
+.plant-input-container {
+  
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 100px;
+  padding: 10px;
+  background-color: #f8f9fa;
+  border-radius: 8px;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  gap: 15px;
+}
+
+.form-group {
+  flex-grow: 1;
+}
+
+.form-group label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 5px;
+  font-size: 14px;
+}
+
+.form-control {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ced4da;
+  border-radius: 5px;
+  transition: border-color 0.3s;
+}
+
+.form-control:focus {
+  border-color: #007bff;
+  outline: none;
+}
+
+.btn-plus {
+  background-color: #06aa9a;
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  font-size: 18px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.3s;
+}
+
+.btn-plus:hover {
+  background-color: #0057b3cb;
+  transform: scale(1.1);
+}
+
+
+
+/* Masquer les sections non affichées */
+.hidden, .d-none {
+  display: none !important;
+}
+
+/* Style pour les boutons */
+.button-container {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  height: auto; /* Ajuste la hauteur automatiquement */
+}
+
+.button-wrapper {
+  margin-top: 15px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.button-wrapper button {
+  text-align: start;
+  background-color: rgba(244, 238, 238, 0.721);
+  color: rgb(44, 42, 42);
+  width: 100%;
+  height: 50px; /* Hauteur fixe pour les boutons */
+  transition: background-color 0.8s, color 0.3s;
+  display: flex;
+  align-items: center; /* Centre les icônes et le texte */
+}
+
+.button-wrapper button i {
+  font-size: 24px;
+  margin-right: 15px; /* Espacement entre l'icône et le texte */
+}
+
+.button-wrapper button:hover {
+  background-color: rgba(90, 87, 87, 0.861);
+  color: white;
+}
+
+/* Styles pour le conteneur du compte */
+.compte {
+  display: flex;
+  align-items: center;
+  margin-top: 20px;
+  background-color:#07946f;
+  padding: 10px;
+  color: white;
+}
+
+/* Style pour l'icône et le texte du compte */
+.compte i {
+  font-size: 26px;
+  margin-right: 10px;
+}
+
+.compte p {
+  margin: 0;
+  box-shadow: 2px 2px 5px rgba(254, 254, 254, 0.2);
+}
+
+/* Responsivité */
+@media (max-width: 668px) {
+  .horizontal-containers {
+      flex-direction: column;
+  }
+
+  .left-container, .right-container {
+      width: 100%;
+      border-right: none;
+  }
+
+  .left-container {
+      border-bottom: 1px solid #dee2e6;
+  }
+
+  .button-container {
+      margin-top: 10px;
+  }
+}
+
+
+.scrollable-container {
+  max-height: 325px; /* Hauteur fixe avec défilement */
+  overflow-y: auto; /* Défilement vertical */
+  border: 1px solid #ddd; /* Bordure pour la visibilité */
+  padding: 10px;
+  box-sizing: border-box;
+}
+
+.scrollable-container::-webkit-scrollbar {
+  width: 0px; /* Cache la barre de défilement */
+  background: transparent; /* Assure que le fond est transparent */
+}
+.info-box {
+  background-color: #f9f9f9;
+  border: 1px solid #ddd;
+  padding: 10px;
+  margin-bottom: 10px;
+  max-height: 100px; /* Hauteur maximale pour chaque info-box */
+  overflow: hidden; /* Masquer le contenu qui dépasse */
+  box-sizing: border-box;
+  display: flex; /* Utilisation de Flexbox */
+  flex-direction: column; /* Alignement en colonne */
+}
+
+.field-group {
+  display: flex; /* Utilisation de Flexbox pour chaque champ */
+  align-items: center; /* Alignement vertical centré */
+  margin-bottom: 10px;
+}
+
+.field-group label {
+  margin-right: 10px; /* Espacement entre le label et le champ */
+  white-space: nowrap; /* Éviter que le label ne se casse sur plusieurs lignes */
+}
+
+.field-group input {
+  flex: 1; /* Prendre tout l'espace restant */
+  padding: 5px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.more-button {
+  display: block;
+  width: 30px;
+  height: 30px;
+  background-color: rgb(6, 170, 154);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  text-align: center;
+  font-size: 20px; /* Taille de l'icône */
+}
+
+.more-button:hover {
+  background-color: #1296e8de;
+}
+
+.more-button i {
+  margin-right: 5px;
+}
+
+.container {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 10px;
+}
+.column {
+  flex: 1;
+  padding: 10px;
+  border: 1px solid #f9f9f9;
+}
+.column h3 {
+  margin-bottom: 10px;
+}
+.info-text p {
+  margin: 5px 0;
+}
+.location-input {
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  max-height: 300px;
+}
+.location-input::-webkit-scrollbar{
+  width: 0px; /* Cache la barre de défilement */
+  background: transparent;
+}
+.location-input label {
+  margin-bottom: 5px;
+}
+.location-input input {
+  margin-bottom: 10px;
+  padding: 5px;
+}
+.map {
+  height: 100%;
+  background-color: #eaeaea;
+}
+.info-text{
+  overflow-y: auto;
+  max-height: 400px !important;
+}
+.info-text::-webkit-scrollbar{
+  width: 0px; /* Cache la barre de défilement */
+  background: transparent;
+}
+
+#formactivite{
+  overflow-y: auto !important;
+  max-height: 100%;
+}
+#formactivite::-webkit-scrollbar{
+  width: 0px;
+  background: transparent !important;;
+}
+
+.table-container {
+  flex: 1;
+  margin-right: 10px;
+}
+.form-container {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+.form-image {
+  height: 30%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.form-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+}
+.form-content input, .form-content select, .form-content button {
+  margin-bottom: 10px;
+}
+.password-container {
+  position: relative;
+  width: fit-content;
+}
+.password-toggle {
+  position: absolute;
+  top: 30%;
+  right: 10px;
+  transform: translateY(-50%);
+  cursor: pointer;
+}
+#acceuil {
+  height: 100vh; /* Hauteur de la fenêtre */
+  display: flex;
+  flex-direction: column;
+}
+#haut {
+  padding: 10px;
+  height: 20%;
+  background-color: rgb(245, 255, 253); /* Couleur de fond pour visualiser */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px; /* Espace entre les divs */
+}
+#bas {
+  height: 80%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px; /* Espace entre les divs */
+  }
+  .gauche {
+  width: 70%;
+  height: 100%;
+  background-color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  }
+  .bas-box {
+    width: 30%;
+    height: 100%;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  }
+.box {
+  flex: 1;
+  background-color: rgba(220, 253, 249, 0.776);
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}

@@ -1,0 +1,54 @@
+{% load static %}
+
+<nav class="navbar navbar-expand-lg navbar-light" style="background-color: #d2ebf7;">
+    <div class="container-fluid">
+        <!-- Logo de l'entreprise -->
+        <a class="navbar-brand" href="#">
+            <img src="{% static 'img/icon.jpeg' %}" alt="Logo" height="30">
+        </a>
+
+        <!-- Bouton de navigation responsive -->
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent"
+                aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="material-icons">menu</i>
+        </button>
+
+        <!-- Contenu de la navbar -->
+        <div class="collapse navbar-collapse" id="navbarContent">
+            <!-- Liste d'éléments au centre -->
+            <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link active" id="nav-acceuil" aria-current="page" href="#acceuil">Acceuil</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="nav-reboisement" href="#Reboisement">Reboisement</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="nav-cartographie" href="#cartographie">Cartographie</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="nav-statistics" href="#statistiques">statistiques</a>
+                </li>
+                
+            </ul>
+
+            <!-- Barre de recherche et boutons à droite -->
+            <form class="d-flex input-group w-auto">
+                <input type="search" class="form-control" placeholder="Rechercher" aria-label="Search">
+                <button class="btn btn-outline-primary" type="button" data-mdb-ripple-color="dark">
+                    <i class="material-icons">search</i>
+                </button>
+            </form>
+
+            <ul class="navbar-nav mb-2 mb-lg-0 ms-3">
+                <li class="nav-item">
+                    <a class="btn btn-primary" href="">Se connecter</a>
+                </li>
+                <li class="nav-item ms-2">
+                    <a class="btn btn-outline-primary" href="">S'inscrire</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+

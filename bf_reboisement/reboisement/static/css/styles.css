@@ -1,0 +1,217 @@
+/* Styles pour les éléments de navigation */
+.card-footer {
+    background-color: #e1e2e4; /* Assurez-vous que la couleur de fond est la même que celle de la carte */
+    border-top: 1px solid #ddd;
+    padding: 10px;
+}
+
+.card-footer .text-body-secondary {
+    margin: 0;
+}
+
+.card-footer i {
+    margin-right: 5px;
+}
+
+
+
+
+.navbar-nav .nav-link {
+    color: #555;
+    font-weight: 500;
+    padding: 0.5rem 1rem;
+    transition: color 0.5s ease, background-color 0.5s ease;
+}
+
+.navbar-nav .nav-link:hover {
+    color: #007bff;
+    background-color: #f8f9fa;
+    border-radius: 5px;
+}
+
+.navbar-nav .nav-link.active {
+    color: #ffffff;
+    background-color: #0a55a5;
+    border-radius: 5px;
+}
+
+.btn-primary {
+    background-color: #007bff;
+    border-color: #007bff;
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+.btn-primary:hover {
+    background-color: #0056b3;
+    border-color: #004085;
+}
+
+.btn-outline-primary {
+    transition: background-color 0.5s ease, color 0.3s ease, border-color 0.5s ease;
+}
+
+.btn-outline-primary:hover {
+    background-color: #007bff;
+    color: #ffffff;
+    border-color: #007bff;
+}
+
+/* Styles pour le carrousel */
+.custom-carousel {
+    height: 500px;
+    position: relative;
+}
+
+.custom-carousel .carousel-item img {
+    height: 500px;
+    object-fit: cover;
+}
+
+.carousel-caption {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 20px;
+    color: #fff;
+}
+
+.carousel-caption .title {
+    font-size: 4rem;
+    color: #ed8907; /* Couleur du titre */
+    margin-bottom: 100px; /* Espace entre le titre et la description */
+}
+
+.carousel-caption .description {
+    font-size: 1.25rem;
+    white-space: nowrap; /* Évite le retour à la ligne */
+    overflow: hidden; /* Cache le texte qui dépasse */
+    box-sizing: border-box;
+    width: 70%; /* Prend toute la largeur disponible */
+    position: relative;
+    animation: typing 8s steps(50, end) 1s 1 normal both, blink 0.75s step-end infinite;
+    margin-bottom: 50px; /* Espace entre la description et le bouton */
+}
+
+.carousel-caption .btn-wrapper {
+    position: absolute;
+    right: 135px;
+    bottom: 20px;
+}
+
+/* Animation pour le texte de saisie */
+@keyframes typing {
+    from {
+        width: 0;
+    }
+    to {
+        width: 100%;
+    }
+}
+
+@keyframes blink {
+    50% {
+        border-color: transparent;
+    }
+}
+
+/* Styles spécifiques pour les petits écrans */
+@media (max-width: 767px) {
+    .navbar-nav {
+        text-align: center;
+        width: 100%;
+    }
+
+    .navbar-nav .nav-item {
+        margin: 0;
+    }
+
+    .navbar-nav .nav-link {
+        display: block;
+        padding: 0.5rem;
+    }
+
+    .form-control {
+        width: 100%;
+    }
+
+    .btn {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+
+    .navbar-toggler {
+        border: none;
+        font-size: 24px;
+        color: #333;
+    }
+
+    .navbar-brand img {
+        height: 25px;
+    }
+}
+
+@media (min-width: 768px) {
+    .navbar-collapse {
+        justify-content: space-between;
+    }
+
+    .navbar-collapse .navbar-nav {
+        flex-direction: row;
+        width: auto;
+    }
+
+    .navbar-collapse .navbar-nav .nav-item {
+        margin-bottom: 0;
+    }
+
+    .navbar-collapse .navbar-nav .nav-link {
+        text-align: center;
+    }
+}
+/*---------------- pour le formulaire de connexion */
+.form-outline {
+    position: relative;
+    margin-bottom: 1.5rem;
+}
+
+.form-label {
+    position: absolute;
+    top: 50%;
+    left: 10px;
+    transform: translateY(-50%);
+    transition: 0.2s ease all;
+    pointer-events: none;
+    color: #999;
+}
+
+.form-control:focus ~ .form-label,
+.form-control:not(:placeholder-shown) ~ .form-label {
+    top: -10px;
+    left: 5px;
+    font-size: 0.75rem;
+    color: rgb(6, 102, 105);
+}
+
+
+/* pour la carte */
+#cartographie {
+    padding: 0;
+    margin: 0 auto; /* Centre le conteneur */
+    width: 100%;
+    max-width: 100%;
+}
+
+#map {
+    height: 600px; /* Ajustez cette hauteur selon vos besoins */
+    width: 100%;
+    max-width: 100%;
+    border: 1px solid #ddd; /* Ajoute une bordure */
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); /* Ajoute une ombre pour un effet visuel */
+}
