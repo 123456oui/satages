@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="fr">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta http-equiv="x-ua-compatible" content="ie=edge" />
+    <title>Bf_Reboisement</title>
+
+    <!-- MDB icon -->
+    <link href="{% static 'css/mdb.min.css' %}" rel="stylesheet" type="text/css"/>
+    <link rel="icon" href="{% static 'img/icon.jpeg' %}" type="image/x-icon" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+    
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background: linear-gradient(135deg, #f5f7fa, #c3cfe2);
+            font-family: 'Arial', sans-serif;
+        }
+        .container {
+            display: flex;
+            width: 80%;
+            max-width: 1200px;
+            height: 80%;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+            border-radius: 5px;
+            overflow: hidden;
+            background-color: #ffffff;
+            background: linear-gradient(135deg, #ffffff, #e6e9f0);
+            transition: box-shadow 0.3s ease;
+        }
+        .container:hover {
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.3);
+        }
+        .box {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            display: flex;
+        }
+        .box img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 15px;
+            transition: transform 0.3s ease;
+        }
+        .box img:hover {
+            transform: scale(1.05);
+        }
+        .box:nth-child(2) {
+            background-color: #f7f7f7;
+            padding: 20px;
+            text-align: center;
+            font-size: 1.2em;
+            color: #333;
+        }
+
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+        .form-group label {
+            font-weight: 100;
+        }
+        .form-group input {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        .show-password {
+            position: absolute;
+            right: 10px;
+            top: 40px;
+            cursor: pointer;
+        }
+        .forgot-password {
+            text-align: right;
+            margin-bottom: 10px;
+        }
+        .forgot-password a {
+            text-decoration: none;
+            color: #007bff;
+        }
+        .forgot-password a:hover {
+            text-decoration: underline;
+        }
+        .btn-login {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            width: 100%;
+        }
+        .btn-login:hover {
+            background-color: #0056b3;
+        }
+        .container2 {
+            max-width: 300px;
+            margin: 80px auto;
+            padding: 20px;
+            background-color: #f9f9f9;
+            border-radius: 8px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        }
+        #error-label {
+        color: red;
+        font-weight: bold;
+        transition: all 0.3s ease;
+        margin-top: 10px;
+    }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="box">
+            <img src="{% static 'img/con.jpg' %}" alt="Image Placeholder">
+        </div>
+        <div class="box">
+            <div class="container2">
+                <h2 style="color: rgb(8, 123, 58);"><strong>Connexion</strong></h2>
+                <form method="post">
+                    {% csrf_token %}
+                    <!-- Div pour l'email -->
+                    <div class="form-group">
+                        <label for="id_username">Email</label>
+                        {{ form.username }}  <!-- Génère le champ de saisie pour l'email -->
+                    </div>
+        
+                    <!-- Div pour le mot de passe avec la possibilité de le cacher/montrer -->
+                    <div class="form-group" style="position: relative;">
+                        <label for="id_password">Mot de passe</label>
+                        {{ form.password }}  <!-- Génère le champ de saisie pour le mot de passe -->
+                        <i class="fas fa-eye show-password" id="togglePassword" style="margin-top: 10px;"></i>
+                    </div>
+        
+                    <!-- Div pour le lien "Mot de passe oublié" -->
+                    <div class="forgot-password">
+                        <a href="{#}">Mot de passe oublié ?</a>
+                    </div>
+        
+                    <!-- Div pour le bouton "Se connecter" -->
+                    <div class="form-group">
+                        <button type="submit" class="btn-login">Se connecter</button>
+                    </div>
+                </form>
+                <label for="" id="error-label" style="display: none; color: red;"> </label>
+            </div>
+        </div>
+    </div>
+    <script>
+        const togglePassword = document.querySelector('#togglePassword');
+        const passwordField = document.querySelector('#id_password');
+
+        togglePassword.addEventListener('click', function () {
+            // Toggle le type d'input entre 'password' et 'text'
+            const type = passwordField.getAttribute('type') === 'password' ? 'text' : 'password';
+            passwordField.setAttribute('type', type);
+            
+            // Toggle l'icône
+            this.classList.toggle('fa-eye');
+            this.classList.toggle('fa-eye-slash');
+        });
+    </script>
+<script>
+    // Fonction pour afficher les erreurs avec une animation d'écriture
+    function typeWriter(textArray, elementId, speed, callback) {
+        let i = 0;
+        let j = 0;
+        const element = document.getElementById(elementId);
+        element.innerHTML = '';  // Réinitialiser le texte avant de commencer l'animation
+
+        // Fonction d'animation
+        function type() {
+            if (i < textArray.length) {
+                if (j < textArray[i].length) {
+                    element.innerHTML += textArray[i].charAt(j);
+                    j++;
+                    setTimeout(type, speed);
+                } else {
+                    element.innerHTML += '<br>';  // Ajouter un saut de ligne après chaque erreur
+                    i++;
+                    j = 0;
+                    setTimeout(type, speed);
+                }
+            } else {
+                // Appeler le callback une fois que l'animation est terminée
+                if (callback) callback();
+            }
+        }
+        type();
+    }
+
+    // Fonction pour effacer les erreurs après 15 secondes
+    function clearErrors(elementId) {
+        setTimeout(function () {
+            const element = document.getElementById(elementId);
+            element.innerHTML = '';  // Vider le contenu du label d'erreurs
+            element.style.display = 'none';  // Cacher le label après l'effacement
+        }, 5000);  // 15 secondes après la fin de l'écriture
+    }
+
+    // Récupérer les erreurs du formulaire via Django et les afficher
+    const errorsText = `{{ form.errors.as_text|escapejs }}`;  // Récupère les erreurs sous forme de texte brut
+
+    if (errorsText) {
+        // Diviser les erreurs par les sauts de ligne (chaque erreur est sur une nouvelle ligne)
+        const errorsArray = errorsText.split("\\n").filter(e => e.trim() !== "");  // Filtrer les lignes vides
+
+        // Afficher le label d'erreurs
+        const errorLabel = document.getElementById("error-label");
+        errorLabel.style.display = 'block';  // Afficher le label
+
+        // Appliquer l'animation d'écriture pour chaque erreur
+        typeWriter(errorsArray, 'error-label', 50, function() {
+            // Une fois que l'animation est terminée, lancer l'effacement après 15 secondes
+            clearErrors('error-label');
+        });
+    }
+</script>
+
+</body>
+</html>

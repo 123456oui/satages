@@ -2,6 +2,9 @@
 {% load static %}
 <html lang="en">
     <head>
+        <script type="text/javascript">
+            const csrfToken = '{{ csrf_token }}';  // Récupérer le token CSRF
+        </script>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta http-equiv="x-ua-compatible" content="ie=edge" />
@@ -38,30 +41,30 @@
 
         <!-- Conteneurs alignés horizontalement -->
         <div class="horizontal-containers">
-            <div class="left-container">
-              <div class="button-container">
+            <div class="left-container" style =" background-color: white ;">
+              <div class="button-container" style =" background-color: white ;">
                 <div class="button-wrapper">
-                    <button class="btn btn-primary" id="btn-accueil">
+                    <button class="" id="btn-accueil" style =" background : none ; border : none ; ">
                         <i class="fas fa-home"></i> Accueil
                     </button>
                 </div>
                 <div class="button-wrapper">
-                    <button class="btn btn-primary" id="btn-activite">
+                    <button class="" id="btn-activite" style =" background : none ; border : none ; ">
                         <i class="fas fa-tree"></i> Activité
                     </button>
                 </div>
                 <div class="button-wrapper">
-                    <button class="btn btn-primary" id="btn-structure">
+                    <button class="" id="btn-structure" style =" background : none ; border : none ; ">
                         <i class="fas fa-building"></i> Structure
                     </button>
                 </div>
                 <div class="button-wrapper">
-                    <button class="btn btn-primary" id="btn-utilisateur">
+                    <button class="" id="btn-utilisateur" style =" background : none ; border : none ; ">
                         <i class="fas fa-user"></i> Utilisateur
                     </button>
                 </div>
                 <div class="button-wrapper">
-                    <button class="btn btn-primary" id="btn-site">
+                    <button class="" id="btn-site" style =" background : none ; border : none ; ">
                         <i class="fas fa-user"></i> Sites
                     </button>
                 </div>
@@ -77,27 +80,27 @@
                     <div id="haut">
                         <div class="box">
                             <h4 class="text-center"> Sites</h4>
-                            <p class="text-center" > <strong>Total :</strong> 09 </p>
+                            <p class="text-center" > <strong>Total :</strong> {{nbsite}} </p>
                         </div>
                         <div class="box">
                             <h4 class="text-center"> Activite</h4>
-                            <p class="text-center" > <strong>Total :</strong> 19 </p>
+                            <p class="text-center" > <strong>Total :</strong> {{nbactivite}} </p>
                         </div>
                         <div class="box">
                             <h4 class="text-center"> Acteurs</h4>
-                            <p class="text-center" > <strong>Total :</strong> 09 </p>
+                            <p class="text-center" > <strong>Total :</strong> {{nbacteur}} </p>
                         </div>
                         <div class="box">
                             <h4 class="text-center">Partenaires</h4>
-                            <p class="text-center" > <strong>Total :</strong> 09 </p>
+                            <p class="text-center" > <strong>Total :</strong> {{nbpartenaire}} </p>
                         </div>
                         <div class="box">
                             <h4 class="text-center"> Localite</h4>
-                            <p class="text-center" > <strong>Total :</strong> 09 </p>
+                            <p class="text-center" > <strong>Total :</strong> {{nblocalite}} </p>
                         </div>
                         <div class="box">
                             <h4 class="text-center"> Structures</h4>
-                            <p class="text-center" > <strong>Total :</strong> 09 </p>
+                            <p class="text-center" > <strong>Total :</strong> {{nbstructure}} </p>
                         </div>
                     </div>
                     <div id="bas">
@@ -129,25 +132,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td>2024-09-01</td>
-                                        <td>John Doe</td>
-                                        <td>50</td>
-                                        <td>10</td>
-                                        <td>fada</td>
-                                        <td>Complété</td>
-                                        <td><i class="modifier-icon" data-id="1" style="margin-right: 15px;cursor: pointer;">✏️</i> <i class="delete-icon" data-id="1" style="cursor: pointer;">🗑️ </i> </td>
-
-                                    </tr>
-                                    <tr>
-                                        <td>2024-09-02</td>
-                                        <td>Jane Smith</td>
-                                        <td>75</td>
-                                        <td>15</td>
-                                        <td>fada</td>
-                                        <td>En cours</td>
-                                        <td><i class="modifier-icon" data-id="2" style="margin-right: 15px;cursor: pointer;">✏️</i>  <i class="delete-icon" data-id="2" style="cursor: pointer;"> 🗑️ </i> </td>
-                                    </tr>
+                                    
                                 </tbody>
                             </table>
                         </div>
@@ -190,10 +175,9 @@
                                         <label for="acteur" style="margin-bottom: 5px;">Sélectionner l'acteur</label>
                                         <select class="form-control" id="acteur" name="acteur">
                                             <option value="" disabled selected>Choisissez un acteur</option>
-                                            <!-- Ajoutez ici les options pour les acteurs -->
-                                            <option value="acteur1">Acteur 1</option>
-                                            <option value="acteur2">Acteur 2</option>
-                                            <option value="acteur3">Acteur 3</option>
+                                            {% for acteur in acteurs %}
+                                            <option value="{{acteur.id}}">{{acteur.nom}}  {{acteur.prenom}}</option>
+                                            {% endfor %}
                                         </select>
                                     </div>
                                     <div class="form-group" style="margin-bottom: 10px;">
@@ -201,16 +185,18 @@
                                         <div class="input-group">
                                             <select class="form-control" id="partenaire" name="partenaire">
                                                 <option value="" disabled selected>Choisissez un partenaire</option>
-                                                <!-- Ajoutez ici les options pour les acteurs -->
-                                                <option value="acteur1">Acteur 1</option>
-                                                <option value="acteur2">Acteur 2</option>
-                                                <option value="acteur3">Acteur 3</option>
+                                                {% for partenaire in partenaires %}
+                                                <option value="{{partenaire.id}}">{{partenaire.nom}} </option>
+                                                {%endfor %}
                                             </select>
                                             <div class="input-group-append">
                                                 <button class="btn btn-outline-secondary" type="button" style="background-color: #06b788; color: white;" onclick="addDiv()">
                                                     <i class="fas fa-plus"></i>
                                                 </button>
                                             </div>
+                                        </div>
+                                        <div style="margin-top: 5px;">
+                                            <input type="number" name="montant" id="montant" placeholder="motaant du financement">
                                         </div>
                                         <div id="list">
                                         </div>
@@ -227,18 +213,18 @@
                                         <!-- ComboBox pour sélectionner une plante -->
                                         <div class="form-group">
                                             <label for="plant-select">Type de plante</label>
-                                            <select id="plant-select" class="form-control">
+                                            <select id="plant-select" class="form-control" name="plante">
                                                 <option value="" disabled selected>type de plante</option>
-                                                <option value="plante1">Plante 1</option>
-                                                <option value="plante2">Plante 2</option>
-                                                <option value="plante3">Plante 3</option>
+                                                {% for plante in plante %}
+                                                    <option value="{{ plante.id }}">{{ plante.nom_courant }}</option>
+                                                {% endfor %}
                                             </select>
                                         </div>
                                     
                                         <!-- Champ de saisie pour le nombre de plantes -->
                                         <div class="form-group">
                                             <label for="nb-plantes">Nombre de plantes</label>
-                                            <input type="number" id="nb-plantes" class="form-control" min="0" placeholder="0">
+                                            <input type="number" id="nb-plantes" class="form-control" min="0" placeholder="0" name="nb-plantes">
                                         </div>
                                     
                                         <!-- Bouton "Plus" -->
@@ -248,17 +234,16 @@
                             </div>
                             <div class="horizontal-div">
                                 <div class="text-center">
-                                    <h4 style="color:rgb(25, 7, 227);"> loscalisation </h4>
+                                    <h4 style="color:rgb(25, 7, 227);"> localisation </h4>
                                 </div>
                                 <div class="scrollable-container" id="info-container">
                                     <div class="form-group" style="margin-bottom: 10px;">
                                         <label for="acteur" style="margin-bottom: 5px;">selectionner la Localite</label>
                                         <select class="form-control" id="acteur" name="acteur">
                                             <option value="" disabled selected>Localite</option>
-                                            <!-- Ajoutez ici les options pour les acteurs -->
-                                            <option value="acteur1">loc 1</option>
-                                            <option value="acteur2">loc 2</option>
-                                            <option value="acteur3">loc 3</option>
+                                            {% for localite in localite %}
+                                                <option value="{{localite.id}}">{{localite.nom_localite}}</option>
+                                            {% endfor %}
                                         </select>
                                     </div>
                                     <div class="info-box"   >
@@ -308,42 +293,23 @@
                             <div class="container">
                                 <!-- Première colonne : Infos textuelles -->
                                 <div class="column info-text">
-                                    <h3>Informations</h3>
-                                    <p style="margin-right: 30px;"><strong>Date : </strong>2024-09-10</p>
-                                    <input type="datetime" name="moddate" id="">
-                                    <p style="margin-right: 30px;"><strong>Acteur : </strong>John Doe</p>
-                                    <select name="acteur" id="">
-                                        <option value="act1">acteur1</option>
-                                        <option value="act1">acteur3</option>
-                                    </select>
-                                    <p style="margin-right: 30px;"><strong>Nombre de plantes :</strong> 150</p>
-                                    <input type="number" name="nbplante" id="">
-                                    <p style="margin-right: 30px;"><strong>nombre de participants : </strong>20</p>
-                                    <input type="number" name="nbparticipant" id="">
-                                    <p style="margin-right: 30px;"><strong>Localité : </strong>Ouagadougou</p>
-                                    <select name="localite" id="">
-                                        <option value="">localite1</option>
-                                        <option value="">localite3</option>
-                                    </select>
-                                    <p style="margin-right: 30px;"><strong>Dernière modification : </strong>2024-09-09</p>
-                                    <p style="margin-right: 30px;"><strong>Structure : </strong>Reboisement Burkina</p>
+                                    <!-- Le contenu sera recréé dynamiquement par JavaScript -->
                                 </div>
-                        
                                 <!-- Deuxième colonne : Longitude/Latitude et bouton Plus -->
                                 <div class="column location">
                                     <h3>Site :</h3>
                                     <div class="location-input">
                                         <label for="longitude">Longitude :</label>
-                                        <input type="text" id="longitude" placeholder="Entrez la longitude">
-                        
+                                        <input type="text" id="longitude" class="longitude" placeholder="Entrez la longitude">
+                                
                                         <label for="latitude">Latitude :</label>
-                                        <input type="text" id="latitude" placeholder="Entrez la latitude">
-                        
+                                        <input type="text" id="latitude" class="latitude" placeholder="Entrez la latitude">
+                                
                                         <button id="add-field" onclick="addFields2()">➕ Ajouter</button>
                                     </div>
                                     <div class="d-flex justify-content-end">
                                         <button type="button" class="btn btn-primary w-100">Modifier</button>
-                                    </div>                                  
+                                    </div>
                                 </div>
                         
                                 <!-- Troisième colonne : Carte -->
@@ -359,7 +325,7 @@
                 <div id="structure">
                     <div class="inner-div" style="display: block;" id="list">
                         <div class="top-div">
-                           <h3>structure</h3>
+                            <h3>Structure</h3>
                         </div>
                         <div class="bottom-div">
                             <div class="table-container">
@@ -372,41 +338,31 @@
                                             <th>Edition</th>
                                         </tr>
                                     </thead>
-                                    <tbody>
-                                        <!-- Contenu du tableau -->
-                                        <tr  data-nom="John Doe" data-mail="john.doe@example.com" data-type="Admin">
-                                            <td>John Doe</td>
-                                            <td>john.doe@example.com</td>
-                                            <td>Admin</td>
-                                            <td><i class="fas fa-trash" style="color: darkred; cursor: pointer;"></i></td>
-                                        </tr>
+                                    <tbody id="structure-table-body">
+                                        <!-- Contenu du tableau rempli dynamiquement -->
                                     </tbody>
                                 </table>
                             </div>
-                    
-                            <!-- Conteneur de formulaire -->
                             <div class="form-container">
-                                <!-- Image -->
                                 <div class="form-image">
-                                    <img src="{% static 'img/bf.jpeg' %}" alt="Image"  style="width: auto;height: 100%;">
+                                    <img id="structure-logo" src="{% static 'img/bf.jpeg' %}" alt="Logo" style="width: auto;height: 100%;">
                                 </div>
-                    
-                                <!-- Formulaire -->
                                 <div class="form-content">
-                                    <input type="text"  id="Nom" placeholder="Nom de la Structure" class="form-control">
+                                    <input type="text" id="Nom" placeholder="Nom de la Structure" class="form-control">
                                     <input type="email" id="Mail" placeholder="Mail de la Structure" class="form-control">
-                                    <input type="file" placeholder="Logo (photo)" class="form-control">
+                                    <input type="file" id="Logo" class="form-control">
                                     <select id="type" class="form-control">
                                         <option value="">Type</option>
-                                        <option value="type1">Type 1</option>
-                                        <option value="type2">Type 2</option>
+                                        <!-- Les options seront ajoutées ici dynamiquement -->
                                     </select>
-                                    <button type="button" class="btn btn-primary">Ajouter</button>
+                                    <button type="button" class="btn btn-primary" id="add-update-button">Ajouter</button>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
+                
+                
                 <div id="utilisateur">
                     <div class="inner-div" style="display: block;" id="list">
                         <div class="top-div">
@@ -464,7 +420,13 @@
 
                 <div id="Site">
                     <div style="display: block;width: 100%; height: 100%;">
-                        <div id="maps" style="width: 100%; height: 100%;"></div>
+                        <div>
+                            <select id="selectType" name="type">
+                                <option value="polygone">Polygones</option>
+                                <option value="centrage">Centrages</option>
+                            </select>
+                        </div>
+                        <div id="maps" style="height: 100%; width: 100% ;"></div>
                     </div>
                 </div>
                </div>
@@ -514,27 +476,6 @@
     </script>
         <script>
 
-            var map = L.map('map').setView([12.368, -1.527], 13); // Coordonnées de Ouagadougou
-
-            // Ajouter une couche de carte OpenStreetMap
-            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-                maxZoom: 19,
-                attribution: '© OpenStreetMap'
-            }).addTo(map);
-
-            // Ajouter la couche satellite
-            var satelliteLayer = L.tileLayer('https://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png', {
-                maxZoom: 19,
-                attribution: '© OpenStreetMap'
-            });
-
-            // Ajout d'un bouton pour basculer entre la vue normale et la vue satellite
-            var baseLayers = {
-                "Vue Normale": L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { maxZoom: 19 }),
-                "Vue Satellite": satelliteLayer
-            };
-
-            L.control.layers(baseLayers).addTo(map);
 
             document.addEventListener('DOMContentLoaded', function () {
                 // Sélectionner les boutons
@@ -558,6 +499,9 @@
                     divStructure.style.display = 'none';
                     divUtilisateur.style.display = 'none';
                     divsite.style.display='none';
+                    acc.style.display = 'none';
+                    form.style.display = 'none';
+                    mod.style.display = 'none'; 
                 }
 
                 // Ajouter des événements de clic pour chaque bouton
@@ -569,6 +513,8 @@
                 btnActivite.addEventListener('click', function () {
                     hideAllDivs();
                     divActivite.style.display = 'block';
+                    acc.style.display = 'block'; 
+                    fetchActivities();
                 });
 
                 btnStructure.addEventListener('click', function () {
@@ -596,8 +542,8 @@
             const mod = document.getElementById('modif');
             addactivite.addEventListener('click', function () {
                 acc.style.display = 'none';
-                form.style.display = 'block';
-                 mod.style.display = 'none';  
+                form.style.display = 'block'; 
+                mod.style.display = 'none';
                 });
 
              retourliste.forEach(element => {
@@ -605,180 +551,519 @@
                         form.style.display = 'none';
                         acc.style.display = 'block';
                         mod.style.display = 'none';
+                        fetchActivities();
                     });
                 });
 
+let mapi;
                 function modi(id) {
-                    form.style.display = 'none';
-                    acc.style.display = 'none';
-                    mod.style.display = 'block';
-                    console.log('ID sélectionné :', id);
-                }
-                
-                function afficherId(id) {
-                    console.log('ID sélectionné :', id);
-                }
+    form.style.display = 'none';
+    acc.style.display = 'none';
+    mod.style.display = 'block';
+    console.log('ID sélectionné :', id);
 
-                function confirmerSuppression(id) {
-                    // Boîte de dialogue de confirmation
-                    const confirmation = confirm("Êtes-vous sûr de vouloir supprimer cet élément ?");
-                    if (confirmation) {
-                        console.log('ID à supprimer :', id);
-                        // Ici, vous pouvez ajouter une logique de suppression si nécessaire
-                    } else {
-                        console.log('Suppression annulée pour l\'ID :', id);
-                    }
-                }
+    // Faire une requête AJAX pour récupérer les détails de l'activité
+    fetch(`/reb/details/${id}`)
+        .then(response => response.json())
+        .then(data => {
+            // Vérifiez que les données sont correctes
+            if (!data.site || !data.site.coordinates || !data.site.coordinates[0]) {
+                console.error('Les données du site sont incorrectes ou manquantes.');
+                return;
+            }
 
-                const deleteIcons = document.querySelectorAll('.delete-icon');
-                deleteIcons.forEach(icon => {
-                    icon.addEventListener('click', () => {
-                        const id = icon.getAttribute('data-id'); // Récupère l'ID à partir de 'data-id'
-                        confirmerSuppression(id); // Demande confirmation avant la suppression
-                    });
-                });
+            // Sélectionner le div info-text et supprimer son contenu
+            const infoTextDiv = document.querySelector('.info-text');
+            infoTextDiv.innerHTML = '';
 
-                const modifierIcons = document.querySelectorAll('.modifier-icon');
-                modifierIcons.forEach(icon => {
-                    icon.addEventListener('click', () => {
-                        const id = icon.getAttribute('data-id');
-                        modi(id);
-                    });
-                });
+            // Recréer le contenu du div info-text avec les données reçues
+            let partenairesHTML = '';
+            for (const [partenaire, montant] of Object.entries(data.finance)) {
+                partenairesHTML += `<p style="margin-right: 30px;"><strong>${partenaire} :</strong> ${montant} FCFA</p>`;
+            }
+
+            let coordinates = data.site.coordinates[0];
+            let polygonePoints = coordinates.map(point => `(${point[0]}, ${point[1]})`).join(', ');
+
+            infoTextDiv.innerHTML = `
+                <h3>Informations</h3>
+                <p style="margin-right: 30px;"><strong>Date : </strong>${data.date}</p>
+                <input type="datetime-local" name="moddate" value="${data.date}">
+                <p style="margin-right: 30px;"><strong>Acteur : </strong></p>
+                <select id="acteur-select" name="acteur">
+                    <option value="" disabled>Acteur</option>
+                    {% for acteur in acteurs %}
+                        <option value="{{ acteur.id }}" ${data.acteur_id === acteur.id ? 'selected' : ''}>{{ acteur.nom }} {{ acteur.prenom }}</option>
+                    {% endfor %}
+                </select>
+                <p style="margin-right: 30px;"><strong>Nombre de plantes :</strong> ${data.nb_plantes}</p>
+                <input type="number" name="nbplante" value="${data.nb_plantes}">
+                <p style="margin-right: 30px;"><strong>Nombre de participants : </strong>${data.nb_participants}</p>
+                <input type="number" name="nbparticipant" value="${data.nb_participants}">
+                <p style="margin-right: 30px;"><strong>Localité : </strong></p>
+                <select id="localite-select" name="localite">
+                    <option value="" disabled>Localité</option>
+                    {% for localite in localite %}
+                                                <option value="{{localite.id}}">{{localite.nom_localite}}</option>
+                                            {% endfor %}
+                </select>
+                <p style="margin-right: 30px;"><strong>Budget : </strong>${data.budget} FCFA</p>
+                ${partenairesHTML}
+                <p style="margin-right: 30px;"><strong>Polygone : </strong>${polygonePoints}</p>
+                <p style="margin-right: 30px;"><strong>Dernière modification : </strong>${data.date_modification}</p>
+                <p style="margin-right: 30px;"><strong>Structure : </strong>${data.structure}</p>
+            `;
+            if (mapi) {
+                mapi.remove();  // Supprime l'instance de la carte existante
+            }
+            // Afficher le polygone sur la carte
+             mapi = L.map('map').setView([coordinates[0][1], coordinates[0][0]], 13);
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+            }).addTo(mapi);
+
+            const polygon = L.polygon(coordinates.map(point => [point[1], point[0]])).addTo(mapi);
+            mapi.fitBounds(polygon.getBounds());
+        })
+        .catch(error => console.error('Erreur:', error));
+}
+
+           
 
                 document.getElementById('btn-plus').addEventListener('click', function() {
-                    // Créer un nouveau div qui contiendra le ComboBox, le champ de nombre, et le bouton
-                    let newDiv = document.createElement('div');
-                    newDiv.classList.add('plant-input-container');
+    // Récupérer le conteneur qui contient les champs
+    const container = document.getElementById('scrollable-div');
+    
+    // Récupérer toutes les sélections et les champs de nombre actuels
+    const selects = container.querySelectorAll('select[name="plante"]');
+    const inputs = container.querySelectorAll('input[name="nb-plantes"]');
 
-                    // Le contenu HTML du nouveau div
-                    newDiv.innerHTML = `
-                        <div class="form-group">
-                            <label for="plant-select">Type de plante</label>
-                            <select id="plant-select" class="form-control">
-                                <option value="" disabled selected>Choisissez une plante</option>
-                                <option value="plante1">Plante 1</option>
-                                <option value="plante2">Plante 2</option>
-                                <option value="plante3">Plante 3</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label for="nb-plantes">Nombre de plantes</label>
-                            <input type="number" class="form-control" id="nb-plantes" min="0" placeholder="0">
-                        </div>
-                    `;
+    // Vérifier que les derniers champs sont remplis
+    if (selects.length > 0 && inputs.length > 0) {
+        const lastSelect = selects[selects.length - 1];
+        const lastInput = inputs[inputs.length - 1];
 
-                    // Ajouter le nouveau div au conteneur parent
-                    document.getElementById('scrollable-div').appendChild(newDiv);
-                });
+        if (lastSelect.value === "" || lastInput.value === "") {
+            alert('Veuillez remplir le dernier champ avant d\'en ajouter un nouveau.');
+            return; // Stopper l'exécution si les champs précédents ne sont pas remplis
+        }
+    }
+
+    // Créer un nouveau div pour les nouveaux champs
+    const newDiv = document.createElement('div');
+    newDiv.classList.add('plant-input-container');
+
+    // Ajouter les champs select et input au nouveau div
+    newDiv.innerHTML = `
+        <div class="form-group">
+            <label for="plant-select">Type de plante</label>
+            <select class="form-control" name="plante">
+                <option value="" disabled selected>Type de plante</option>
+                {% for plante in plante %}
+                    <option value="{{ plante.id }}">{{ plante.nom_courant }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="nb-plantes">Nombre de plantes</label>
+            <input type="number" class="form-control" name="nb-plantes" min="0" placeholder="0">
+        </div>
+    `;
+
+    // Ajouter le nouveau div au conteneur
+    container.appendChild(newDiv);
+});
+
+function getPlantesData() {
+    // Récupérer toutes les sélections et les champs de nombre
+    const selects = document.querySelectorAll('select[name="plante"]');
+    const inputs = document.querySelectorAll('input[name="nb-plantes"]');
+    
+    // Créer un objet pour stocker les résultats
+    const result = {};
+
+    // Vérifier que le nombre de selects et d'inputs est le même
+    if (selects.length !== inputs.length) {
+        console.error('Le nombre de selects ne correspond pas au nombre d\'inputs.');
+        return;
+    }
+
+    // Parcourir chaque sélection et chaque champ de nombre
+    selects.forEach((select, index) => {
+        const input = inputs[index]; // Associer l'input correspondant au select
+        if (input) {
+            const selectedPlante = select.options[select.selectedIndex]?.text; // Nom de la plante
+            const nbPlantes = parseInt(input.value, 10) || 0; // Nombre de plantes, en tant qu'entier
+
+            // Ajouter ou additionner les valeurs au résultat
+            if (selectedPlante) {
+                if (result[selectedPlante]) {
+                    result[selectedPlante] += nbPlantes; // Additionner si déjà existant
+                } else {
+                    result[selectedPlante] = nbPlantes; // Ajouter la nouvelle entrée
+                }
+            }
+        } else {
+            console.warn(`Pas d'input correspondant pour le select à l'index ${index}.`);
+        }
+    });
+
+    // Afficher le résultat dans la console ou ailleurs
+    return result; // Retourner l'objet
+}
+
+
 
                 function generateUniqueId() {
                     return 'field-' + new Date().getTime(); // Génère un ID unique basé sur le timestamp actuel
                 }
 
-                function addField() {
-                    // Récupérer les valeurs des champs existants
-                    const container = document.getElementById('info-container');
-                    const infoBoxes = container.querySelectorAll('.info-box');
+                let fieldCounter = 4; // Compteur pour les nouveaux champs
 
-                    infoBoxes.forEach((box, index) => {
-                        const longitudeInput = box.querySelector('input[type="text"]:first-of-type');
-                        const latitudeInput = box.querySelector('input[type="text"]:last-of-type');
-                        
-                        console.log(`Box ${index + 1} - Longitude: ${longitudeInput.value}, Latitude: ${latitudeInput.value}`);
-                    });
+function addField() {
+    // Sélectionner tous les champs de longitude et latitude
+    const longitudes = document.querySelectorAll('.info-box input[name^="longitude"]');
+    const latitudes = document.querySelectorAll('.info-box input[name^="latitude"]');
 
-                    // Ajouter un nouveau champ
-                    const newBox = document.createElement('div');
-                    newBox.classList.add('info-box');
-
-                    const uniqueLongitudeId = generateUniqueId();
-                    const uniqueLatitudeId = generateUniqueId();
-
-                    const longitudeField = document.createElement('div');
-                    longitudeField.classList.add('field-group');
-                    longitudeField.innerHTML = `
-                        <label for="${uniqueLongitudeId}">Longitude:</label>
-                        <input type="text" id="${uniqueLongitudeId}" name="${uniqueLongitudeId}">
-                    `;
-
-                    const latitudeField = document.createElement('div');
-                    latitudeField.classList.add('field-group');
-                    latitudeField.innerHTML = `
-                        <label for="${uniqueLatitudeId}">Latitude:</label>
-                        <input type="text" id="${uniqueLatitudeId}" name="${uniqueLatitudeId}">
-                    `;
-
-                    newBox.appendChild(longitudeField);
-                    newBox.appendChild(latitudeField);
-
-                    container.insertBefore(newBox, document.querySelector('.more-button'));
-                }
-
-                function addFields2() {
-                    const locationInputDiv = document.querySelector('.location-input');
-
-                    const newLongitudeLabel = document.createElement('label');
-                    newLongitudeLabel.innerText = 'Longitude :';
-                    const newLongitudeInput = document.createElement('input');
-                    newLongitudeInput.type = 'text';
-                    newLongitudeInput.placeholder = 'Entrez la longitude';
-                    
-                    const newLatitudeLabel = document.createElement('label');
-                    newLatitudeLabel.innerText = 'Latitude :';
-                    const newLatitudeInput = document.createElement('input');
-                    newLatitudeInput.type = 'text';
-                    newLatitudeInput.placeholder = 'Entrez la latitude';
-
-                    locationInputDiv.appendChild(newLongitudeLabel);
-                    locationInputDiv.appendChild(newLongitudeInput);
-                    locationInputDiv.appendChild(newLatitudeLabel);
-                    locationInputDiv.appendChild(newLatitudeInput);
-                }
-
-                function addDiv() {
-            const container = document.getElementById('list');
-            const newDiv = document.createElement('div');
-            newDiv.className = 'inner-div';
-            newDiv.innerHTML = `
-                <div class="form-group" style="margin-bottom: 10px; margin-top: 10px;">
-                                        <label for="acteur" style="margin-bottom: 5px;">Sélectionner le partenaire</label>
-                                        <div class="input-group">
-                                            <select class="form-control" id="acteur" name="acteur">
-                                                <option value="" disabled selected>Choisissez un partenaire</option>
-                                                <!-- Ajoutez ici les options pour les acteurs -->
-                                                <option value="acteur1">Acteur 1</option>
-                                                <option value="acteur2">Acteur 2</option>
-                                                <option value="acteur3">Acteur 3</option>
-                                            </select>
-                                        </div>
-                                    </div>
-            `;
-            container.appendChild(newDiv);
+    // Vérifier que tous les champs précédents sont remplis
+    let allFieldsFilled = true;
+    longitudes.forEach((longitude, index) => {
+        const latitude = latitudes[index];
+        if (!longitude.value.trim() || !latitude.value.trim()) {
+            allFieldsFilled = false;
         }
+    });
 
-        function populateForm(row) {
-            document.getElementById('Nom').value = row.getAttribute('data-nom');
-            document.getElementById('Mail').value = row.getAttribute('data-mail');
-            document.getElementById('type').value = row.getAttribute('data-type');
-        }
-        function populateForm2(row) {
-            document.getElementById('Nomu').value = row.getAttribute('data-nomu');
-            document.getElementById('Mailu').value = row.getAttribute('data-mailu');
-            document.getElementById('password').value = row.getAttribute('data-typeu');
-            document.getElementById('PreNomu').value = row.getAttribute('data-prenomu');
+    if (!allFieldsFilled) {
+        alert('Veuillez remplir tous les champs de longitude et latitude avant d\'ajouter de nouveaux champs.');
+        return;
+    }
 
-        }
-        document.querySelectorAll('.tab tbody tr').forEach(row => {
-            row.addEventListener('click', function() {
-                populateForm2(this);
+    // Créer un nouveau conteneur de champs
+    const infoContainer = document.getElementById('info-container');
+    const newInfoBox = document.createElement('div');
+    newInfoBox.className = 'info-box';
+
+    // Créer les nouveaux éléments
+    const newLongitudeLabel = document.createElement('label');
+    newLongitudeLabel.innerText = 'Longitude:';
+    const newLongitudeInput = document.createElement('input');
+    newLongitudeInput.type = 'text';
+    newLongitudeInput.id = `longitude${fieldCounter}`;
+    newLongitudeInput.name = `longitude${fieldCounter}`;
+    newLongitudeInput.placeholder = 'Entrez la longitude';
+
+    const newLatitudeLabel = document.createElement('label');
+    newLatitudeLabel.innerText = 'Latitude:';
+    const newLatitudeInput = document.createElement('input');
+    newLatitudeInput.type = 'text';
+    newLatitudeInput.id = `latitude${fieldCounter}`;
+    newLatitudeInput.name = `latitude${fieldCounter}`;
+    newLatitudeInput.placeholder = 'Entrez la latitude';
+
+    // Ajouter les nouveaux éléments au conteneur
+    const newFieldGroupLongitude = document.createElement('div');
+    newFieldGroupLongitude.className = 'field-group';
+    newFieldGroupLongitude.appendChild(newLongitudeLabel);
+    newFieldGroupLongitude.appendChild(newLongitudeInput);
+
+    const newFieldGroupLatitude = document.createElement('div');
+    newFieldGroupLatitude.className = 'field-group';
+    newFieldGroupLatitude.appendChild(newLatitudeLabel);
+    newFieldGroupLatitude.appendChild(newLatitudeInput);
+
+    newInfoBox.appendChild(newFieldGroupLongitude);
+    newInfoBox.appendChild(newFieldGroupLatitude);
+
+    // Ajouter le conteneur au div principal
+    infoContainer.appendChild(newInfoBox);
+
+    // Incrémenter le compteur d'ID
+    fieldCounter++;
+}
+function getAllLocationData() {
+    // Sélectionner tous les champs de longitude et latitude
+    const longitudes = document.querySelectorAll('.info-box input[name^="longitude"]');
+    const latitudes = document.querySelectorAll('.info-box input[name^="latitude"]');
+    
+    // Créer un tableau pour stocker les résultats
+    const locationData = [];
+
+    // Assurez-vous que le nombre de longitudes et latitudes est le même
+    if (longitudes.length !== latitudes.length) {
+        console.error('Le nombre de champs de longitude et latitude ne correspond pas.');
+        return;
+    }
+
+    // Parcourir chaque longitude et latitude et les ajouter au tableau
+    longitudes.forEach((longitudeInput, index) => {
+        const latitudeInput = latitudes[index];
+        
+        // Récupérer les valeurs
+        const longitude = longitudeInput.value.trim();
+        const latitude = latitudeInput.value.trim();
+        
+        // Ajouter uniquement si les deux valeurs sont présentes
+        if (longitude && latitude) {
+            locationData.push({
+                longitude: longitude,
+                latitude: latitude
             });
-        });
-        document.querySelectorAll('.tabl tbody tr').forEach(row => {
-            row.addEventListener('click', function() {
-                populateForm(this);
+        }
+    });
+
+    // Afficher le résultat dans la console ou ailleurs
+    console.log(locationData);
+    return locationData; // Retourner le tableau d'objets
+}
+
+
+                let idCounter = 0; // Initialisez le compteur d'ID
+
+function addFields2() {
+    // Sélectionner tous les champs de longitude et latitude
+    const longitudes = document.querySelectorAll('.location-input .longitude');
+    const latitudes = document.querySelectorAll('.location-input .latitude');
+
+    // Vérifier que tous les champs précédents sont remplis
+    let allFieldsFilled = true;
+    longitudes.forEach((longitude, index) => {
+        const latitude = latitudes[index];
+        if (!longitude.value.trim() || !latitude.value.trim()) {
+            allFieldsFilled = false;
+        }
+    });
+
+    if (!allFieldsFilled) {
+        alert('Veuillez remplir tous les champs de longitude et latitude avant d\'ajouter de nouveaux champs.');
+        return;
+    }
+
+    // Créer un nouveau conteneur de champs
+    const locationInputDiv = document.querySelector('.location-input');
+    const newFieldsContainer = document.createElement('div');
+    newFieldsContainer.className = 'location-field';
+
+    // Créer les nouveaux éléments
+    const newLongitudeLabel = document.createElement('label');
+    newLongitudeLabel.innerText = 'Longitude :';
+    const newLongitudeInput = document.createElement('input');
+    newLongitudeInput.type = 'text';
+    newLongitudeInput.className = 'longitude';
+    newLongitudeInput.id = `longitude-${idCounter}`; // ID unique
+    newLongitudeInput.placeholder = 'Entrez la longitude';
+
+    const newLatitudeLabel = document.createElement('label');
+    newLatitudeLabel.innerText = 'Latitude :';
+    const newLatitudeInput = document.createElement('input');
+    newLatitudeInput.type = 'text';
+    newLatitudeInput.className = 'latitude';
+    newLatitudeInput.id = `latitude-${idCounter}`; // ID unique
+    newLatitudeInput.placeholder = 'Entrez la latitude';
+
+    // Ajouter les nouveaux éléments au conteneur
+    newFieldsContainer.appendChild(newLongitudeLabel);
+    newFieldsContainer.appendChild(newLongitudeInput);
+    newFieldsContainer.appendChild(newLatitudeLabel);
+    newFieldsContainer.appendChild(newLatitudeInput);
+
+    // Ajouter le conteneur au div principal
+    locationInputDiv.appendChild(newFieldsContainer);
+
+    // Incrémenter le compteur d'ID
+    idCounter++;
+}
+
+
+function getLocationDatamodifier() {
+    // Sélectionner tous les champs de longitude et latitude
+    const longitudes = document.querySelectorAll('.location-input .longitude');
+    const latitudes = document.querySelectorAll('.location-input .latitude');
+    
+    // Créer un tableau pour stocker les résultats
+    const result = [];
+
+    // Vérifier que le nombre de longitudes et latitudes est le même
+    if (longitudes.length !== latitudes.length) {
+        console.error('Le nombre de champs de longitude ne correspond pas au nombre de champs de latitude.');
+        return;
+    }
+
+    // Parcourir chaque champ de longitude et latitude
+    longitudes.forEach((longitude, index) => {
+        const latitude = latitudes[index];
+        if (longitude && latitude) {
+            const longitudeValue = longitude.value.trim();
+            const latitudeValue = latitude.value.trim();
+
+            // Ajouter les valeurs au résultat si elles sont valides
+            if (longitudeValue && latitudeValue) {
+                result.push({
+                    longitude: longitudeValue,
+                    latitude: latitudeValue
+                });
+            }
+        }
+    });
+
+    // Afficher le résultat dans la console ou ailleurs
+    console.log(result);
+    return result; // Retourner le tableau d'objets
+}
+
+
+function addDiv() {
+    const container = document.getElementById('list');
+    
+    // Vérifier s'il y a déjà des divs dans le container
+    const lastDiv = container.lastElementChild;
+    if (lastDiv) {
+        // Trouver le select dans la dernière div ajoutée
+        const lastSelect = lastDiv.querySelector('select');
+        const lastinput=lastDiv.querySelector('input');
+        // Vérifier si un partenaire a été sélectionné
+        if (lastSelect && lastSelect.value === ""  ) {
+            alert("Veuillez d'abord sélectionner un partenaire avant d'ajouter un nouveau champ.");
+            return; // Sortir de la fonction si aucun partenaire n'a été sélectionné
+        }
+        if (lastinput && lastinput.value === ""){
+            alert("Veuillez d'abord saisir une valeur avant d'ajouter un nouveau champ.");
+            return; // Sortir de la fonction si aucune valeur n'a été saisie 
+        }
+    }
+
+    // Créer un nouvel élément div
+    const newDiv = document.createElement('div');
+    newDiv.className = 'inner-div';
+
+    // Utiliser un identifiant unique pour le nouveau select
+    const uniqueId = `acteur-${Date.now()}`;
+    
+    newDiv.innerHTML = `
+        <div class="form-group" style="margin-bottom: 10px; margin-top: 10px;">
+            <label for="${uniqueId}" style="margin-bottom: 5px;">Sélectionner le partenaire</label>
+            <div class="input-group">
+                <select class="form-control" id="${uniqueId}" name="partenaire">
+                    <option value="" disabled selected>Choisissez un partenaire</option>
+                    <!-- Ajouter dynamiquement les options ici -->
+                    {% for partenaire in partenaires %}
+                        <option value="{{ partenaire.id }}">{{ partenaire.nom }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div style="margin-top: 5px;">
+                <input type="number" name="montant" id="montant" placeholder="motaant du financement">
+            </div>
+        </div>
+    `;
+
+    // Ajouter la nouvelle div au container
+    container.appendChild(newDiv);
+}
+
+function getpartenaireajout() {
+    // Récupérer toutes les divs contenant les partenaires et les montants
+    const divs = document.querySelectorAll('.inner-div');
+    
+    // Créer un dictionnaire pour stocker les partenaires et leurs montants
+    const partenaireMontantDict = {};
+    
+    // Parcourir chaque div pour récupérer le partenaire sélectionné et son montant
+    divs.forEach(div => {
+        const select = div.querySelector('select[name="partenaire"]');
+        const montantInput = div.querySelector('input[name="montant"]');
+
+        // Vérifier que le partenaire est sélectionné et que le montant est rempli
+        if (select && select.value && montantInput && montantInput.value) {
+            const partenaire = select.value;
+            const montant = parseFloat(montantInput.value);
+
+            // Si le partenaire existe déjà dans le dictionnaire, on additionne les montants
+            if (partenaireMontantDict[partenaire]) {
+                partenaireMontantDict[partenaire] += montant;
+            } else {
+                // Sinon, on initialise avec le montant actuel
+                partenaireMontantDict[partenaire] = montant;
+            }
+        }
+    });
+
+    // Retourner le dictionnaire des partenaires et montants additionnés
+    return partenaireMontantDict;
+}
+
+
+function fetchActivities() {
+    fetch('/reb/get_activites')  // L'URL de la vue Django
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.json();
+        })
+        .then(data => {
+            const activities = data.activites;  // Liste des activités
+            const tableBody = document.querySelector('tbody');  // Le corps du tableau
+
+            // Vider le tableau avant de le remplir
+            tableBody.innerHTML = '';
+
+            // Boucler sur les activités et les ajouter au tableau
+            activities.forEach(activity => {
+                const row = document.createElement('tr');
+                
+                row.innerHTML = `
+                    <td>${activity.date}</td>
+                    <td>${activity.acteur}</td>
+                    <td>${activity.nb_plantes}</td>
+                    <td>${activity.nb_participants}</td>
+                    <td>${activity.localite}</td>
+                    <td>${activity.statut}</td>
+                    <td>
+                        <i class="modifier-icon" data-id="${activity.id}" style="margin-right: 15px;cursor: pointer;">✏️</i>
+                        <i class="delete-icon" data-id="${activity.id}" style="cursor: pointer;">🗑️</i>
+                    </td>
+                `;
+                tableBody.appendChild(row);  // Ajouter la ligne au tableau
             });
+
+            // Réattacher les événements de clic aux icônes modifier/supprimer
+            attachEventHandlers();
+        })
+        .catch(error => console.error('Erreur lors de la récupération des activités :', error));
+}
+
+function attachEventHandlers() {
+    // Sélectionner toutes les icônes de modification
+    const modifyIcons = document.querySelectorAll('.modifier-icon');
+    modifyIcons.forEach(icon => {
+        icon.addEventListener('click', function() {
+            const activityId = this.getAttribute('data-id');
+            modi(activityId)
+            
+            // Ajouter ici la logique pour modifier l'activité (par exemple ouvrir un formulaire de modification)
         });
+    });
+
+    // Sélectionner toutes les icônes de suppression
+    const deleteIcons = document.querySelectorAll('.delete-icon');
+    deleteIcons.forEach(icon => {
+        icon.addEventListener('click', function() {
+            const activityId = this.getAttribute('data-id');
+            
+            // Afficher une boîte de confirmation avant de supprimer
+            const isConfirmed = confirm("Êtes-vous sûr de vouloir supprimer cette activité ?");
+            
+            if (isConfirmed) {
+                console.log(`Supprimer l'activité avec l'ID : ${activityId}`);
+                // Logique pour supprimer l'activité (par exemple, envoyer une requête à l'API)
+            } else {
+                console.log("Suppression annulée");
+            }
+        });
+    });
+}
+
 
         function togglePassword() {
         var passwordInput = document.getElementById("password");
@@ -793,49 +1078,375 @@
         }
     }
 
-    var map;
 
-        function initMap() {
-            // Vérifier si la carte est déjà initialisée
-            if (map !== undefined) {
-                map.remove();  // Supprimer l'ancienne carte avant de la recréer
-            }
+var map;  // Déclarer la carte à l'extérieur pour qu'elle soit accessible globalement
+var displayedPolygons = [];  // Stocker les polygones affichés
+var displayedMarkers = [];   // Stocker les marqueurs affichés
 
-            // Initialiser la carte et la centrer sur Ouagadougou
-            map = L.map('maps').setView([12.3714, -1.5197], 12);
+function initMap() {
+    // Vérifier si la carte est déjà initialisée
+    if (map !== undefined) {
+        map.remove();  // Supprimer l'ancienne carte avant de la recréer
+    }
 
-            // Ajouter la couche OpenStreetMap (vue par défaut)
-            var osmLayer = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-                attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-            }).addTo(map);
+    // Initialiser la carte et la centrer sur Ouagadougou
+    map = L.map('maps').setView([12.3714, -1.5197], 12);
 
-            // Ajouter la couche Mapbox (vue satellite)
-            var mapboxSatellite = L.tileLayer('https://api.mapbox.com/styles/v1/mapbox/satellite-v9/tiles/256/{z}/{x}/{y}?access_token=YOUR_MAPBOX_ACCESS_TOKEN', {
-                attribution: '&copy; <a href="https://www.mapbox.com/about/maps/">Mapbox</a> contributors',
-                maxZoom: 18,
-                tileSize: 256,
-                zoomOffset: 0,
-                accessToken: 'YOUR_MAPBOX_ACCESS_TOKEN'
-            });
+    // Ajouter la couche OpenStreetMap (vue par défaut)
+    var osmLayer = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+    }).addTo(map);
 
-            // Ajouter un marqueur pour la ville de Ouagadougou
-            var marker = L.marker([12.3714, -1.5197]).addTo(map)
-                .bindPopup('Ouagadougou, capitale du Burkina Faso')
-                .openPopup();
+    // Charger les polygones par défaut à l'initialisation
+    fetchPolygons();
 
-            // Contrôle de zoom pour la carte
-            L.control.zoom({
-                position: 'topright'
-            }).addTo(map);
+    // Gestion du changement du combobox pour basculer entre polygones et centrages
+    document.getElementById('selectType').addEventListener('change', function () {
+        var selectedType = this.value;
+        
+        // Supprimer les polygones et marqueurs existants avant d'ajouter de nouvelles données
+        clearMap();
 
-            // Contrôles pour basculer entre les différentes couches
-            var baseLayers = {
-                "Vue par défaut (OSM)": osmLayer,
-                "Vue satellite (Mapbox)": mapboxSatellite
-            };
-
-            L.control.layers(baseLayers).addTo(map);
+        if (selectedType === 'polygone') {
+            fetchPolygons();  // Afficher les polygones
+        } else if (selectedType === 'centrage') {
+            fetchCenters();  // Afficher les centrages
         }
+    });
+}
+
+// Fonction pour récupérer et afficher les polygones
+function fetchPolygons() {
+    fetch('/reb/get-polygones')  // L'URL de la vue Django qui renvoie les polygones
+        .then(response => response.json())
+        .then(data => {
+            data.forEach(function (activite) {
+                // Convertir les tuples Python en format compatible avec Leaflet
+                var coordinates = activite.coordinates.map(function (point) {
+                    return [point[1], point[0]];  // Inverser lat/lng pour Leaflet
+                });
+
+                // Ajouter le polygone sur la carte
+                var polygon = L.polygon(coordinates).addTo(map);
+
+                // Ajouter une popup au polygone
+                polygon.bindPopup(`
+                    <b>Date:</b> ${activite.date}<br>
+                    <b>Acteur:</b> ${activite.acteur}<br>
+                    <b>Nombre de plantes:</b> ${activite.nb_plantes}<br>
+                    <b>Nombre de participants:</b> ${activite.nb_participants}
+                `);
+
+                // Stocker le polygone dans la liste pour pouvoir le supprimer plus tard
+                displayedPolygons.push(polygon);
+            });
+        })
+        .catch(error => console.error('Erreur:', error));
+}
+
+// Fonction pour récupérer et afficher les centrages
+function fetchCenters() {
+    fetch('/reb/get-polygones')  // L'URL de la vue Django qui renvoie les polygones et centrages
+        .then(response => response.json())
+        .then(data => {
+            data.forEach(function (activite) {
+                // Ajouter un marqueur au centre de chaque localité
+                var center = activite.center;
+                var marker = L.marker([center[0], center[1]]).addTo(map);
+
+                // Ajouter une popup au marqueur
+                marker.bindPopup(`
+                    <b>Date:</b> ${activite.date}<br>
+                    <b>Acteur:</b> ${activite.acteur}<br>
+                    <b>Nombre de plantes:</b> ${activite.nb_plantes}<br>
+                    <b>Nombre de participants:</b> ${activite.nb_participants}
+                `);
+
+                // Stocker le marqueur dans la liste pour pouvoir le supprimer plus tard
+                displayedMarkers.push(marker);
+            });
+        })
+        .catch(error => console.error('Erreur:', error));
+}
+
+// Fonction pour supprimer tous les polygones et marqueurs de la carte
+function clearMap() {
+    // Supprimer les polygones
+    displayedPolygons.forEach(function (polygon) {
+        map.removeLayer(polygon);
+    });
+    displayedPolygons = [];  // Vider la liste des polygones affichés
+
+    // Supprimer les marqueurs
+    displayedMarkers.forEach(function (marker) {
+        map.removeLayer(marker);
+    });
+    displayedMarkers = [];  // Vider la liste des marqueurs affichés
+}
+
+let selectedStructureId = null;
+
+document.addEventListener('DOMContentLoaded', function() {
+    loadStructures();  // Charger les structures au démarrage
+    loadTypes();  // Charger les types au démarrage
+
+    document.getElementById('add-update-button').addEventListener('click', function() {
+        const nom = document.getElementById('Nom').value;
+        const mail = document.getElementById('Mail').value;
+        const logo = document.getElementById('Logo').files[0];
+        const type = document.getElementById('type').value;
+
+        const formData = new FormData();
+        formData.append('nom', nom);
+        formData.append('mail', mail);
+        if (logo) {
+            formData.append('logo', logo);
+        }
+        formData.append('type', type);
+        if (selectedStructureId) {
+            formData.append('id', selectedStructureId);
+        }
+        formData.append('csrfmiddlewaretoken', getCookie('csrftoken'));
+
+        fetch('/reb/add_or_update_structure', {
+            method: 'POST',
+            body: formData,
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.id) {
+                loadStructures();  // Mettre à jour le tableau
+                resetForm();
+            }
+        });
+    });
+});
+
+function loadStructures() {
+    fetch('/reb/load_structures')
+    .then(response => response.json())
+    .then(data => {
+        const tableBody = document.querySelector('.tabl tbody');
+        tableBody.innerHTML = '';  // Vider le tableau avant de le remplir
+
+        // Parcourir chaque structure et créer les lignes du tableau
+        data.structures.forEach(structure => {
+            const row = document.createElement('tr');
+            row.setAttribute('data-id', structure.id);
+            row.setAttribute('data-nom', structure.nom);
+            row.setAttribute('data-mail', structure.mail);
+            row.setAttribute('data-type', structure.type_structure);  // Utiliser 'type_structure' comme renvoyé par la fonction Python
+            row.setAttribute('data-logo', structure.logo);  // L'URL du logo est déjà prête dans 'logo'
+
+            // Créer la ligne du tableau avec les données
+            row.innerHTML = `
+                <td>${structure.nom}</td>
+                <td>${structure.mail}</td>
+                <td>${structure.type_structure}</td>
+                <td>
+                    <i class="fas fa-edit" style="color: blue; cursor: pointer;" onclick="populateForm(this.parentElement.parentElement)"></i>
+                    <i class="fas fa-trash" style="color: darkred; cursor: pointer;" onclick="confirmDelete(${structure.id})"></i>
+                </td>
+            `;
+            
+            // Ajouter la ligne au tableau
+            tableBody.appendChild(row);
+        });
+    });
+}
+
+function loadTypes() {
+    fetch('/reb/load_types')
+    .then(response => response.json())
+    .then(data => {
+        const typeSelect = document.getElementById('type');
+        typeSelect.innerHTML = ''; // Vider les options précédentes
+        data.types.forEach(type => {
+            const option = document.createElement('option');
+            option.value = type.id;
+            option.textContent = type.type_structure;
+            typeSelect.appendChild(option);
+        });
+    });
+}
+
+function populateForm(row) {
+    document.getElementById('Nom').value = row.getAttribute('data-nom');
+    document.getElementById('Mail').value = row.getAttribute('data-mail');
+    document.getElementById('type').value = row.getAttribute('data-type');  // ID du type
+    selectedStructureId = row.getAttribute('data-id');
+
+    // Afficher le logo
+    const logoSrc = row.getAttribute('data-logo');
+    document.getElementById('structure-logo').src = logoSrc || "{% static 'img/bf.jpeg' %}"; // Logo par défaut si vide
+}
+
+function resetForm() {
+    document.getElementById('Nom').value = '';
+    document.getElementById('Mail').value = '';
+    document.getElementById('Logo').value = ''; // Réinitialiser le champ de fichier
+    document.getElementById('type').value = '';
+    document.getElementById('structure-logo').src = "{% static 'img/bf.jpeg' %}";
+    selectedStructureId = null;
+}
+
+function confirmDelete(id) {
+    if (confirm("Êtes-vous sûr de vouloir supprimer cette structure ?")) {
+        deleteStructure(id);
+    }
+}
+
+function deleteStructure(id) {
+    fetch(`/reb/delete_structure/${id}/`, { 
+        method: 'DELETE',
+        headers: {
+            'X-CSRFToken': getCookie('csrftoken'),
+        },
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            loadStructures();  // Mettre à jour le tableau après suppression
+        }
+    });
+}
+
+// Fonction pour obtenir le cookie CSRF
+function getCookie(name) {
+    let cookieValue = null;
+    if (document.cookie && document.cookie !== '') {
+        const cookies = document.cookie.split(';');
+        for (let i = 0; i < cookies.length; i++) {
+            const cookie = cookies[i].trim();
+            if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
+            }
+        }
+    }
+    return cookieValue;
+}
+
+let selectedUserId = null;
+
+document.addEventListener('DOMContentLoaded', function() {
+    loadUsers(); // Charger les utilisateurs au démarrage
+
+    document.getElementById('useradd').addEventListener('click', function() {
+    const nom = document.getElementById('Nomu').value;
+    const prenom = document.getElementById('PreNomu').value;
+    const mail = document.getElementById('Mailu').value;
+    const password = document.getElementById('password').value;
+
+    const formData = new FormData();
+    formData.append('nom', nom);
+    formData.append('prenom', prenom);
+    formData.append('mail', mail);
+    
+    // Inclure le mot de passe s'il est modifié
+    formData.append('password', password);
+
+    if (selectedUserId) {
+        formData.append('id', selectedUserId);
+    }
+
+    formData.append('csrfmiddlewaretoken', getCookie('csrftoken'));
+
+    fetch('/reb/add_or_update_user', {
+        method: 'POST',
+        body: formData,
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.id) {
+            loadUsers(); // Mettre à jour le tableau des utilisateurs
+            resetUserForm(); // Réinitialiser le formulaire après soumission
+        }
+    });
+});
+
+});
+
+function loadUsers() {
+    fetch('/reb/load_users')
+    .then(response => response.json())
+    .then(data => {
+        const tableBody = document.querySelector('.tab tbody');
+        tableBody.innerHTML = ''; // Vider le tableau avant de le remplir
+        data.users.forEach(user => {
+            const row = document.createElement('tr');
+            row.setAttribute('data-id', user.id);
+            row.setAttribute('data-nomu', user.nom);  // Prénom
+            row.setAttribute('data-prenomu', user.prenom);  // Nom
+            row.setAttribute('data-mailu', user.mail);
+            row.setAttribute('data-passwordu', user.password);  // Stocker le mot de passe ici
+
+            row.innerHTML = `
+                <td>${user.nom}</td>
+                <td>${user.prenom}</td>
+                <td>${user.mail}</td>
+                <td>*********</td>  <!-- Ne pas afficher le mot de passe -->
+                <td>
+                    <i class="fas fa-edit" style="color: blue; cursor: pointer;" onclick="populateUserForm(this.parentElement.parentElement)"></i>
+                    <i class="fas fa-trash" style="color: darkred; cursor: pointer;" onclick="confirmDeleteUser(${user.id})"></i>
+                </td>
+            `;
+            tableBody.appendChild(row);
+        });
+    });
+}
+
+
+function populateUserForm(row) {
+    const userId = row.getAttribute('data-id');
+    const nom = row.getAttribute('data-nomu');
+    const prenom = row.getAttribute('data-prenomu');
+    const mail = row.getAttribute('data-mailu');
+    const password = '';   // Récupérer le mot de passe dans l'attribut data
+
+    // Remplir les champs du formulaire avec les données existantes
+    document.getElementById('Nomu').value = nom;
+    document.getElementById('PreNomu').value = prenom;
+    document.getElementById('Mailu').value = mail;
+    
+    // Remplir le champ du mot de passe
+    document.getElementById('password').value = password;
+
+    // Stocker l'id de l'utilisateur sélectionné dans une variable globale
+    selectedUserId = userId;
+}
+
+function resetUserForm() {
+    document.getElementById('Nomu').value = '';
+    document.getElementById('PreNomu').value = '';
+    document.getElementById('Mailu').value = '';
+    document.getElementById('password').value = '';
+    selectedUserId = null;
+}
+
+function confirmDeleteUser(id) {
+    if (confirm("Êtes-vous sûr de vouloir supprimer cet utilisateur ?")) {
+        deleteUser(id);
+    }
+}
+
+function deleteUser(id) {
+    fetch(`/reb/delete_user/${id}/`, {
+        method: 'DELETE',
+        headers: {
+            'X-CSRFToken': getCookie('csrftoken'), // Ajout du token CSRF
+        },
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            loadUsers(); // Mettre à jour le tableau après suppression
+        }
+    });
+}
+
+// Fonction pour obtenir le cookie CSRF
+
 
         </script>
     </body>
